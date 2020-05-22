@@ -24,7 +24,7 @@ const config: Configuration = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Item Manager',
+            title: 'My App',
             template: 'src/index.ejs'
         }),
         new HashedModuleIdsPlugin()
