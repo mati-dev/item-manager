@@ -4,3 +4,7 @@ node_modules/
 dist/
 
 **/__diff_output__/
+
+src/**/*.d.ts
+src/**/*.js
+src/**/*.js.map

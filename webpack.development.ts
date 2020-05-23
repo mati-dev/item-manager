@@ -27,10 +27,11 @@ const config: Configuration = {
     ],
 
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, 'public'),
         hot: true,
         open: true
-    }
+    },
+    optimization: undefined
 };
 
 export default config;

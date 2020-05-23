@@ -36,7 +36,6 @@
     "no-any": true,
     "no-empty-interface": true,
     "no-for-in": true,
-    "no-import-side-effect": true,
     "no-inferrable-types": [
       true,
       "ignore-params",
@@ -101,7 +100,10 @@
         "html-webpack-plugin",
         "puppeteer",
         "jest-image-snapshot",
-        "jest-each"
+        "jest-each",
+        "mini-css-extract-plugin",
+        "optimize-css-assets-webpack-plugin",
+        "terser-webpack-plugin"
       ]
     ],
     "no-inferred-empty-object-type": false,
