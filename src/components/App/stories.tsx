@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import {App} from './App';
+import {App} from './index';
 
 
 export default {title: 'App'};

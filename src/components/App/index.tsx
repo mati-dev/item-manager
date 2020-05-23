@@ -9,7 +9,7 @@ export class App extends Component {
 
         return (
             <div>Hey apple!</div>
-        );
+    );
 
     }
 

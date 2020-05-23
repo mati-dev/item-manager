@@ -101,7 +101,7 @@
         "html-webpack-plugin",
         "puppeteer",
         "jest-image-snapshot",
-        "expect-puppeteer"
+        "jest-each"
       ]
     ],
     "no-inferred-empty-object-type": false,
