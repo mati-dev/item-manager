@@ -25,13 +25,16 @@
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.18",
     "@types/jest": "^25.2.3",
+    "@types/lodash": "^4.14.152",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
+    "@types/react-test-renderer": "^16.9.2",
     "@types/webpack": "^4.41.13",
     "@types/webpack-dev-server": "^3.11.0",
     "babel-loader": "^8.1.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^25.5.4",
+    "react-test-renderer": "^16.13.1",
     "source-map-loader": "^0.2.4",
     "ts-jest": "^25.5.1",
     "ts-loader": "^7.0.4",
@@ -43,9 +46,12 @@
     "webpack-dev-server": "^3.11.0"
   },
   "jest": {
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "testMatch": [
       "<rootDir>/test/specs/**/*.[jt]s?(x)"
-    ]
+    ],
+    "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
+    }
   }
 }
