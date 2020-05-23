@@ -98,7 +98,8 @@
       true,
       [
         "webpack",
-        "html-webpack-plugin"
+        "html-webpack-plugin",
+        "@storybook/addon-storyshots"
       ]
     ],
     "no-inferred-empty-object-type": false,
