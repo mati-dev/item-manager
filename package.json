@@ -4,7 +4,8 @@
   "description": "Simple typescript & React boilerplate",
   "scripts": {
     "build": "webpack",
-    "dev:start": "webpack-dev-server --config webpack.development.ts"
+    "dev:start": "webpack-dev-server --config webpack.development.ts",
+    "dev:storybook": "start-storybook"
   },
   "repository": "https://github.com/mati-dev/typescript-react-boilerplate",
   "keywords": [
@@ -18,11 +19,14 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.18",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
     "@types/webpack": "^4.41.13",
     "@types/webpack-dev-server": "^3.11.0",
+    "babel-loader": "^8.1.0",
     "html-webpack-plugin": "^4.3.0",
     "source-map-loader": "^0.2.4",
     "ts-jest": "^26.0.0",
