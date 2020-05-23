@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Simple typescript & React boilerplate",
   "scripts": {
-    "test": "jest",
+    "test": "start-server-and-test test:storybook http-get://localhost:9009 test:jest",
+    "test:jest": "jest",
+    "test:storybook": "start-storybook -p 9009 -s public --ci",
+    "test:update": "start-server-and-test test:storybook http-get://localhost:9009 test:jest:update",
+    "test:jest:update": "jest -u",
     "build": "webpack",
     "dev:start": "webpack-dev-server --config webpack.development.ts",
-    "dev:storybook": "start-storybook"
+    "dev:storybook": "start-storybook -p 6006 -s public"
   },
   "repository": "https://github.com/mati-dev/typescript-react-boilerplate",
   "keywords": [
@@ -21,11 +25,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@storybook/addon-storyshots": "^5.3.18",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^5.3.18",
+    "@types/expect-puppeteer": "^4.4.1",
     "@types/jest": "^25.2.3",
+    "@types/jest-environment-puppeteer": "^4.3.1",
+    "@types/jest-image-snapshot": "^3.1.0",
     "@types/lodash": "^4.14.152",
+    "@types/puppeteer": "^3.0.0",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
     "@types/react-test-renderer": "^16.9.2",
@@ -34,8 +41,11 @@
     "babel-loader": "^8.1.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^25.5.4",
-    "react-test-renderer": "^16.13.1",
+    "jest-image-snapshot": "^4.0.0",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^3.1.0",
     "source-map-loader": "^0.2.4",
+    "start-server-and-test": "^1.11.0",
     "ts-jest": "^25.5.1",
     "ts-loader": "^7.0.4",
     "ts-node": "^8.10.1",
@@ -46,12 +56,12 @@
     "webpack-dev-server": "^3.11.0"
   },
   "jest": {
-    "testEnvironment": "jsdom",
-    "testMatch": [
-      "<rootDir>/test/specs/**/*.[jt]s?(x)"
-    ],
+    "preset": "jest-puppeteer",
     "transform": {
-      "^.+\\.(t|j)sx?$": "ts-jest"
-    }
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.ts"
+    ]
   }
 }

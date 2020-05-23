@@ -99,7 +99,9 @@
       [
         "webpack",
         "html-webpack-plugin",
-        "@storybook/addon-storyshots"
+        "puppeteer",
+        "jest-image-snapshot",
+        "expect-puppeteer"
       ]
     ],
     "no-inferred-empty-object-type": false,

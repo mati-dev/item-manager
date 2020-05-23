@@ -6,6 +6,6 @@ import {App} from './App';
 
 export default {title: 'App'};
 
-export const simple = () => (
+export const basic = () => (
     <App/>
 );
