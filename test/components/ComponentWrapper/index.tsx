@@ -7,14 +7,21 @@ import styles from './styles.scss';
 
 interface ComponentWrapperProps {
     verticalCenter?: boolean;
+    fullWidth?: boolean;
 }
 
 export function ComponentWrapper(props: PropsWithChildren<ComponentWrapperProps>): ReactElement {
 
-    const {verticalCenter} = props;
+    const {verticalCenter, fullWidth, children} = props;
 
     return (
-        <div className={classNames(styles.wrapper, verticalCenter && styles.verticalCenter)}>{props.children}</div>
+        <div className={classNames(
+            styles.wrapper,
+            verticalCenter && styles.verticalCenter,
+            fullWidth && styles.fullWidth
+        )}>
+            {children}
+        </div>
     );
 
 }

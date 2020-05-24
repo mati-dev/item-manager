@@ -21,11 +21,17 @@ $verticalMarginLg: 20px;
 
   }
 
+  &.vertical-center {
+    justify-content: center;
+  }
+
+  &.full-width {
+    max-width: none;
+  }
+
 }
 
-.vertical-center {
-  justify-content: center;
-}
+
 
 
 
