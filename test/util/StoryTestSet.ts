@@ -1,6 +1,7 @@
 
 import path from 'path';
 import each from 'jest-each';
+import {paramCase} from 'param-case';
 
 
 export class StoryTestSet {
@@ -23,9 +24,19 @@ export class StoryTestSet {
 
     private static async getImage(title: string, sample: string): Promise<string> {
 
-        await page.goto(`http://localhost:9009/iframe.html?selectedKind=${title}&selectedStory=${sample}`);
+        const isMobile = sample.endsWith('Mobile');
+        const page = await browser.newPage();
 
-        return page.screenshot();
+        await page.setViewport(isMobile ? {height: 896, width: 414} : {height: 1112, width: 834});
+
+        await page.goto(`http://localhost:9009/iframe.html?selectedKind=${title}&selectedStory=${paramCase(sample)}`,
+            {waitUntil: 'networkidle2'});
+
+        const shot = await page.screenshot();
+
+        await page.close();
+
+        return shot;
 
     }
 

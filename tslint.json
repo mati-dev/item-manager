@@ -105,7 +105,8 @@
         "optimize-css-assets-webpack-plugin",
         "terser-webpack-plugin",
         "@storybook/addon-centered/react",
-        "@storybook/react"
+        "@storybook/react",
+        "param-case"
       ]
     ],
     "no-inferred-empty-object-type": false,
