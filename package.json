@@ -53,6 +53,7 @@
     "concurrently": "^5.2.0",
     "css-loader": "^3.5.3",
     "html-webpack-plugin": "^4.3.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^25.5.4",
     "jest-each": "^26.0.1",
     "jest-image-snapshot": "^4.0.0",
@@ -80,6 +81,9 @@
     "preset": "jest-puppeteer",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
     },
     "setupFilesAfterEnv": [
       "<rootDir>/setupTests.ts"
