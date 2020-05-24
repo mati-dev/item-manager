@@ -1,0 +1,31 @@
+
+@import "../../../src/styles/mixins";
+
+$horizontalMargin: 8px;
+$verticalMargin: 10px;
+$horizontalMarginLg: 20px;
+$verticalMarginLg: 20px;
+
+.wrapper {
+  padding: $verticalMargin $horizontalMargin;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 2 * #{$verticalMargin});
+  max-width: 950px;
+  margin: auto;
+
+  @include media(){
+
+    padding: $verticalMarginLg $horizontalMarginLg;
+    min-height: calc(100vh - 2 * #{$verticalMarginLg});
+
+  }
+
+}
+
+.vertical-center {
+  justify-content: center;
+}
+
+
+

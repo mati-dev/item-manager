@@ -1,0 +1,82 @@
+
+@import "../../styles/colors";
+@import "../../styles/mixins";
+
+
+$icon-size: 40px;
+$abs-margin: 10px;
+
+.wrapper {
+  position: relative;
+
+  @include media() {
+    display: flex;
+  }
+
+}
+
+.img {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  @include media() {
+    height: auto;
+    width: 200px;
+  }
+
+}
+
+.icon {
+  position: absolute;
+  top: $abs-margin;
+  right: $abs-margin;
+  height: $icon-size;
+  width: $icon-size;
+
+}
+
+.content {
+  position: relative;
+  padding: 8px 15px;
+
+  .cardInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    @include media(){
+      margin-bottom: 5px;
+    }
+
+  }
+
+  .price {
+    font-size:  24px;
+    font-weight: bold;
+
+    @include media(){
+      position: absolute;
+      bottom: $abs-margin;
+      right: $abs-margin;
+      font-size: 30px;
+    }
+
+  }
+
+  .description {
+    @include media() {
+      padding-right: 100px;
+    }
+  }
+
+}
+
+.email {
+  color: $grey-light;
+}
+
+
+

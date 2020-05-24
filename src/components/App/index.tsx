@@ -1,7 +1,6 @@
 
 import React, {Component, ReactElement} from 'react';
-
-import styles from './styles.scss';
+import {StylesProvider} from '@material-ui/core';
 
 
 export class App extends Component {
@@ -9,7 +8,10 @@ export class App extends Component {
     public render(): ReactElement {
 
         return (
-            <div>Hey <span className={styles.bold}>apple!</span></div>
+            <StylesProvider injectFirst>
+                <div>Hey <span>apple!</span></div>
+            </StylesProvider>
+
     );
 
     }

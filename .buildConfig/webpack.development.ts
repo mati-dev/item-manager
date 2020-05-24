@@ -3,6 +3,7 @@ import {Configuration, HotModuleReplacementPlugin} from 'webpack';
 import path from 'path';
 
 import mainConfig from './webpack.config';
+import {styleRule} from './rules';
 
 
 const config: Configuration = {
@@ -14,6 +15,7 @@ const config: Configuration = {
         ...mainConfig.module,
         rules: [
             ...mainConfig.module.rules,
+            styleRule('development'),
             {
                 enforce: 'pre',
                 test: /\.js$/,
