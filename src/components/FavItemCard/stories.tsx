@@ -3,9 +3,8 @@ import React from 'react';
 
 import {FavItemCard} from './index';
 
-import {favItem} from '../../../test/resources/favItem';
-import {ComponentWrapper} from '../../../test/components/ComponentWrapper';
-import {withViewport} from '../../../test/components';
+import {appItem} from '../../../test/src/resources';
+import {withViewport, ComponentWrapper} from '../../../test/src/components';
 
 
 export default {
@@ -15,8 +14,8 @@ export default {
     ]
 };
 
-const basic = <FavItemCard item={favItem}/>;
-const faved = <FavItemCard item={{...favItem, favourite: true}}/>;
+const basic = <FavItemCard item={appItem}/>;
+const faved = <FavItemCard item={{...appItem, favourite: true}}/>;
 
 export const basicMobile = withViewport()(basic);
 export const favedMobile = withViewport()(faved);

@@ -2,7 +2,7 @@
 import React from 'react';
 
 import {Sort} from './index';
-import {ComponentWrapper, withViewport} from '../../../test/components';
+import {ComponentWrapper, withViewport} from '../../../test/src/components';
 
 
 export default {

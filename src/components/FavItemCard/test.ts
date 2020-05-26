@@ -1,5 +1,5 @@
 
-import {StoryTestSet} from '../../../test/util';
+import {StoryTestSet} from '../../../test/src/util';
 
 
 describe('FavItemCard', () => {

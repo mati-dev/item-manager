@@ -3,7 +3,7 @@ import React, {Component, ReactElement} from 'react';
 import {Favorite, FavoriteBorder} from '@material-ui/icons';
 
 
-import {FavItem} from '../../model';
+import {AppItem} from '../../model';
 
 import {Card} from '../Card';
 import {Text} from '../Text';
@@ -12,7 +12,7 @@ import {Image} from '../Image';
 import styles from './styles.scss';
 
 
-export class FavItemCard extends Component<{item: FavItem}> {
+export class FavItemCard extends Component<{item: AppItem}> {
 
     public render(): ReactElement {
 

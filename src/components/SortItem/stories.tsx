@@ -3,7 +3,7 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 
 import {SortItem} from './index';
-import {withViewport, ComponentWrapper} from '../../../test/components';
+import {withViewport, ComponentWrapper} from '../../../test/src/components';
 
 
 export default {

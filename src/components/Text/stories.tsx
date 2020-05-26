@@ -2,8 +2,7 @@
 import React from 'react';
 
 import {Text} from './index';
-import {ComponentWrapper} from '../../../test/components/ComponentWrapper';
-import {withViewport} from '../../../test/components';
+import {withViewport, ComponentWrapper} from '../../../test/src/components';
 
 
 export default {

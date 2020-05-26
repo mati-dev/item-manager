@@ -2,7 +2,7 @@
 import React from 'react';
 
 import {Header} from './index';
-import {withViewport} from '../../../test/components';
+import {withViewport} from '../../../test/src/components';
 
 
 export default {

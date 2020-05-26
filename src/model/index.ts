@@ -1,5 +1,6 @@
 
 
 export * from './Item';
-export * from './FavItem';
+export * from './AppItem';
 export * from './Styled';
+export * from './AppStore';

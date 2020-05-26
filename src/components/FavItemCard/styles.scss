@@ -22,7 +22,7 @@ $abs-margin: 10px;
   object-position: center;
 
   @include media() {
-    height: auto;
+    height: 200px;
     width: 200px;
   }
 

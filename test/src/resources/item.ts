@@ -1,5 +1,5 @@
 
-import {Item} from '../../src/model';
+import {Item} from '../../../src/model';
 
 
 export const item: Item = {
@@ -9,5 +9,5 @@ export const item: Item = {
         'encontrar en la web de apple. Esta libre.',
     price: 740,
     email: 'iphonemail@wallapop.com',
-    image: 'https://webpublic.s3-eu-west-1.amazonaws.com/tech-test/img/iphone.png'
+    image: '/iphone.jpg'
 };
