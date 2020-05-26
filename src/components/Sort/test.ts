@@ -2,7 +2,7 @@
 import {StoryTestSet} from '../../../test/util';
 
 
-describe('Text', () => {
+describe('Sort', () => {
 
     new StoryTestSet().launchStoryTests(__dirname);
 

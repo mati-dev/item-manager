@@ -2,8 +2,9 @@
 import {StoryTestSet} from '../../../test/util';
 
 
-describe('Text', () => {
+describe('Header', () => {
 
     new StoryTestSet().launchStoryTests(__dirname);
 
 });
+

@@ -28,13 +28,16 @@ $abs-margin: 10px;
 
 }
 
+.fav {
+  color: red;
+}
+
 .icon {
   position: absolute;
   top: $abs-margin;
   right: $abs-margin;
   height: $icon-size;
   width: $icon-size;
-
 }
 
 .content {

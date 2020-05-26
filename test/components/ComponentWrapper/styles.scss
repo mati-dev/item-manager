@@ -25,6 +25,10 @@ $verticalMarginLg: 20px;
     justify-content: center;
   }
 
+  &.horizontal-center {
+    align-items: center;
+  }
+
   &.full-width {
     max-width: none;
   }

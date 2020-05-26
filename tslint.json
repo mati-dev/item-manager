@@ -106,6 +106,7 @@
         "terser-webpack-plugin",
         "@storybook/addon-centered/react",
         "@storybook/react",
+        "@storybook/addon-actions",
         "param-case"
       ]
     ],

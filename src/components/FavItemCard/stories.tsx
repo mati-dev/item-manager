@@ -19,7 +19,7 @@ const basic = <FavItemCard item={favItem}/>;
 const faved = <FavItemCard item={{...favItem, favourite: true}}/>;
 
 export const basicMobile = withViewport()(basic);
-export const basicDesktop = () => (basic);
-
 export const favedMobile = withViewport()(faved);
+
+export const basicDesktop = () => (basic);
 export const favedDesktop = () => (faved);

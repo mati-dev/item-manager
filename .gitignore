@@ -2,6 +2,7 @@
 .idea/
 node_modules/
 dist/
+dist-storybook/
 
 **/__diff_output__/
 

@@ -1,0 +1,36 @@
+
+@import "../../styles/colors";
+@import "../../styles/mixins";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 5px 20px;
+  background-color: $primary-dark;
+
+  color: $white;
+
+  > * {
+    padding: 5px;
+  }
+}
+
+.favWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.favText {
+  display: none;
+
+  @include media() {
+    display: inline;
+    margin-left: 5px;
+    font-weight: bold;
+  }
+
+}
