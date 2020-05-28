@@ -13,8 +13,6 @@ interface SortItemProps {
     onClick(): void;
 }
 
-// TODO: I don't really like the api (needing to indicate sort & asc).
-//       Need to think of a good way to handle with one prop
 export function SortItem(props: SortItemProps): ReactElement {
 
     const {children, sort, sortKey, onClick} = props;
