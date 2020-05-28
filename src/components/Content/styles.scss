@@ -1,8 +1,15 @@
 
+@import "../../styles/mixins";
 @import "../../styles/colors";
 
 .wrapper {
   padding: 15px;
+
+  @include media() {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
   > * {
     margin-bottom: 10px;
@@ -19,16 +26,47 @@
   width: 100%;
 }
 
-.outline {
-  border-color: $primary;
-}
-
 .card {
 
   margin-bottom: 15px;
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+}
+
+.price-wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  > * {
+    margin: 0 8px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+  }
+
+  .price-text {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    font-weight: bold;
+  }
+
+}
+
+.sort, .price-wrapper {
+  margin: 0 10px 5px;
+
+  @include media() {
+    max-width: 400px;
   }
 
 }

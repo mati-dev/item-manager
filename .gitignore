@@ -4,8 +4,6 @@ node_modules/
 dist/
 dist-storybook/
 
-**/__diff_output__/
-
 src/**/*.d.ts
 src/**/*.js
 src/**/*.js.map

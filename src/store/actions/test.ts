@@ -6,8 +6,8 @@ import createMockStore from 'redux-mock-store';
 import Mocked = jest.Mocked;
 
 import {appItem, item} from '../../../test/src/resources';
-import {retrieveItems, setSearchValue, setSort, toggleFaved} from './index';
-import {GET_ITEMS, SET_SEARCH, SET_SORT, TOGGLE_FAVED} from '../reducers';
+import {retrieveItems, setMaxPriceRange, setPriceRange, setSearchValue, setSort, toggleFaved} from './index';
+import {RETRIEVE_ITEMS, SET_MAX_PRICE_RANGE, SET_PRICE_RANGE, SET_SEARCH, SET_SORT, TOGGLE_FAVED} from '../reducers';
 import {initialState} from '../initialState';
 
 
@@ -32,8 +32,14 @@ describe('Actions', () => {
 
         const actions = store.getActions();
         expect(actions).toEqual([{
-            type: GET_ITEMS,
+            type: RETRIEVE_ITEMS,
             payload: [appItem]
+        }, {
+            type: SET_MAX_PRICE_RANGE,
+            payload: appItem.price
+        }, {
+            type: SET_PRICE_RANGE,
+            payload: [0, appItem.price]
         }]);
 
     });
@@ -121,6 +127,32 @@ describe('Actions', () => {
             }]);
 
         });
+
+    });
+
+    test('setPriceRange', async () => {
+
+        const store = mockStore();
+        await store.dispatch(setPriceRange([0, 100]));
+
+        const actions = store.getActions();
+        expect(actions).toEqual([{
+            type: SET_PRICE_RANGE,
+            payload: [0, 100]
+        }]);
+
+    });
+
+    test('setMaxPriceRange', async () => {
+
+        const store = mockStore();
+        await store.dispatch(setMaxPriceRange(100));
+
+        const actions = store.getActions();
+        expect(actions).toEqual([{
+            type: SET_MAX_PRICE_RANGE,
+            payload: 100
+        }]);
 
     });
 

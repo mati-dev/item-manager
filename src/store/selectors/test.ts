@@ -1,5 +1,5 @@
 
-import {getSearch, getSort, getVisibleItems, isAppReady} from './index';
+import {getMaxPriceRange, getPriceRange, getSearch, getSort, getVisibleItems, isAppReady} from './index';
 import {initialState} from '../initialState';
 import {appItem} from '../../../test/src/resources';
 
@@ -55,6 +55,22 @@ describe('Selectors', () => {
 
         expect(emptySort).toEqual('');
         expect(filledSort).toEqual('title');
+
+    });
+
+    test('getPriceRange', () => {
+
+        const range = getPriceRange({...initialState, priceRange: [0, 100]});
+
+        expect(range).toEqual([0, 100]);
+
+    });
+
+    test('getMaxPriceRange', () => {
+
+        const range = getMaxPriceRange({...initialState, maxPriceRange: 100});
+
+        expect(range).toEqual(100);
 
     });
 

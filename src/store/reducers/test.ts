@@ -1,5 +1,5 @@
 
-import {GET_ITEMS, rootReducer, SET_SEARCH, TOGGLE_FAVED} from './index';
+import {RETRIEVE_ITEMS, rootReducer, SET_MAX_PRICE_RANGE, SET_PRICE_RANGE, SET_SEARCH, TOGGLE_FAVED} from './index';
 import {initialState} from '../initialState';
 
 import {appItem} from '../../../test/src/resources';
@@ -17,10 +17,10 @@ describe('Reducers', () => {
 
     });
 
-    test(GET_ITEMS, () => {
+    test(RETRIEVE_ITEMS, () => {
 
         const action = {
-            type: GET_ITEMS,
+            type: RETRIEVE_ITEMS,
             payload: [appItem]
         };
 
@@ -55,6 +55,32 @@ describe('Reducers', () => {
         const newState = rootReducer(state, action);
 
         expect(newState).toEqual({...state, items: [{...appItem, favourite: true}]});
+
+    });
+
+    test(SET_PRICE_RANGE, () => {
+
+        const action = {
+            type: SET_PRICE_RANGE,
+            payload: [0, 100]
+        };
+
+        const newState = rootReducer(initialState, action);
+
+        expect(newState).toEqual({...initialState, priceRange: action.payload});
+
+    });
+
+    test(SET_MAX_PRICE_RANGE, () => {
+
+        const action = {
+            type: SET_MAX_PRICE_RANGE,
+            payload: 100
+        };
+
+        const newState = rootReducer(initialState, action);
+
+        expect(newState).toEqual({...initialState, maxPriceRange: action.payload});
 
     });
 

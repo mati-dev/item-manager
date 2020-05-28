@@ -1,14 +1,15 @@
 
 import React, {ChangeEvent, Component, ReactElement} from 'react';
 import {connect} from 'react-redux';
-import {TextField} from '@material-ui/core';
+import {TextField, Input, InputAdornment} from '@material-ui/core';
 
 import {Sort} from '../Sort';
+import {Text} from '../Text';
 
 import styles from './styles.scss';
 import {AppItem} from '../../model';
-import {AppDispatch, setSearchValue} from '../../store/actions';
-import {getSearch, getVisibleItems} from '../../store/selectors';
+import {AppDispatch, setSearchValue, setPriceRange} from '../../store/actions';
+import {getMaxPriceRange, getPriceRange, getSearch, getVisibleItems} from '../../store/selectors';
 import {FavItemCard} from '../FavItemCard';
 import bind from 'bind-decorator';
 
@@ -16,7 +17,10 @@ import bind from 'bind-decorator';
 interface InjectedProps {
     items: AppItem[];
     search: string;
+    priceRange: [number, number];
+    maxRange: number;
     setSearch(value: string): void;
+    setPriceRange(values: [number, number]): void;
 }
 
 class ContentImpl extends Component {
@@ -27,7 +31,7 @@ class ContentImpl extends Component {
 
     public render(): ReactElement {
 
-        const {items, search} = this.injected;
+        const {items, search, priceRange, maxRange} = this.injected;
 
         return (
             <div className={styles.wrapper}>
@@ -39,7 +43,25 @@ class ContentImpl extends Component {
                            value={search}
                            onChange={this.handleOnSearchChange}/>
 
-                <Sort options={[
+                {priceRange && maxRange && (
+                    <div className={styles.priceWrapper}>
+                        <Text className={styles.priceText}>Price range:</Text>
+
+                        <Input
+                            value={priceRange[0]}
+                            type="number"
+                            endAdornment={<InputAdornment position="end">€</InputAdornment>}
+                            onChange={this.handleMinRangeChange}/>
+
+                        <Input
+                            value={priceRange[1]}
+                            type="number"
+                            endAdornment={<InputAdornment position="end">€</InputAdornment>}
+                            onChange={this.handleMaxRangeChange}/>
+                    </div>
+                )}
+
+                <Sort className={styles.sort} options={[
                     {
                         title: 'Title',
                         key: 'title'
@@ -70,15 +92,28 @@ class ContentImpl extends Component {
         this.injected.setSearch(event.target.value);
     }
 
+    @bind
+    private handleMinRangeChange(event: ChangeEvent<HTMLInputElement>): void {
+        this.injected.setPriceRange([+event.target.value, this.injected.priceRange[1]]);
+    }
+
+    @bind
+    private handleMaxRangeChange(event: ChangeEvent<HTMLInputElement>): void {
+        this.injected.setPriceRange([this.injected.priceRange[0], +event.target.value]);
+    }
+
 }
 
 // tslint:disable-next-line:variable-name
 export const Content = connect(
     state => ({
         items: getVisibleItems(state),
-        search: getSearch(state)
+        search: getSearch(state),
+        priceRange: getPriceRange(state),
+        maxPriceRange: getMaxPriceRange(state)
     }),
     (dispatch: AppDispatch) => ({
-        setSearch: (value: string) => dispatch(setSearchValue(value))
+        setSearch: (value: string) => dispatch(setSearchValue(value)),
+        setPriceRange: (values: [number, number]) => dispatch(setPriceRange(values))
     })
 )(ContentImpl);

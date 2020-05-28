@@ -9,10 +9,12 @@ export const getVisibleItems = (state: AppState) =>
         .filter(item => {
 
             const {title, description, price, email} = item;
+            const range = getPriceRange(state);
 
             const regex = new RegExp(getSearch(state), 'giu');
 
-            return regex.test(title) || regex.test(description) || regex.test(email);
+            return (!range || (range && price >= range[0] && price <= range[1]))
+                && (regex.test(title) || regex.test(description) || regex.test(email));
 
         })
         .sort((a, b) => {
@@ -25,7 +27,9 @@ export const getVisibleItems = (state: AppState) =>
             }
 
             const isDesc = sort.startsWith('-');
-            const compare = key === 'price' ? a.price - b.price : a[key].localeCompare(b[key]);
+            const compare = key === 'price'
+                ? a.price - b.price
+                : a[key].localeCompare(b[key]);
 
             return isDesc
                 ? -compare
@@ -36,3 +40,7 @@ export const getVisibleItems = (state: AppState) =>
 export const getSearch = (state: AppState) => state.search;
 
 export const getSort = (state: AppState) => state.sort;
+
+export const getPriceRange = (state: AppState) => state.priceRange;
+
+export const getMaxPriceRange = (state: AppState) => state.maxPriceRange;

@@ -14,4 +14,6 @@ export interface AppState {
     items: AppItem[];
     search: string;
     sort: string;
+    priceRange?: [number, number];
+    maxPriceRange?: number;
 }

@@ -16,7 +16,7 @@ export class ItemConsumer {
 
         const response = await axios.get<{items: Item[]}>(ItemConsumer.ITEMS_URL);
 
-        return response.data.items.map((item, index) => ({...item, id: index}));
+        return response.data.items.map((item, index) => ({...item, id: index, price: +item.price}));
 
     }
 

@@ -10,6 +10,8 @@ import {SortItem} from '../SortItem';
 import {Text} from '../Text';
 
 import styles from './styles.scss';
+import {Styled} from '../../model';
+import classNames from 'classnames';
 
 
 interface Option {
@@ -17,7 +19,7 @@ interface Option {
     key: string;
 }
 
-interface SortProps {
+interface SortProps extends Styled {
     options: Option[];
 }
 
@@ -34,11 +36,11 @@ class SortImpl extends Component<SortProps> {
 
     public render(): ReactElement {
 
-        const {options} = this.props;
+        const {options, className, style} = this.props;
         const {sort} = this.injected;
 
         return (
-            <div className={styles.wrapper}>
+            <div className={classNames(styles.wrapper, className)} style={style}>
                 <Text className={styles.title} >Sort by...</Text>
                 {options.map(option => (
                     <SortItem key={option.key}

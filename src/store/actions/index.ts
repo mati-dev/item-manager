@@ -3,7 +3,7 @@ import {Action, ActionCreator} from 'redux';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 import {ItemConsumer} from '../../util/ItemConsumer';
-import {GET_ITEMS, SET_SEARCH, SET_SORT, TOGGLE_FAVED} from '../reducers';
+import {RETRIEVE_ITEMS, SET_MAX_PRICE_RANGE, SET_PRICE_RANGE, SET_SEARCH, SET_SORT, TOGGLE_FAVED} from '../reducers';
 import {AppState} from '../../model';
 import {getSort} from '../selectors';
 
@@ -22,10 +22,16 @@ export const retrieveItems: ComplexAction = () => {
 
         const items = await new ItemConsumer().getItems();
 
+        const max = items.reduce((previous, current) => previous < current.price ? current.price : previous, 0);
+
         dispatch({
-            type: GET_ITEMS,
+            type: RETRIEVE_ITEMS,
             payload: items
         });
+
+        dispatch(setMaxPriceRange(max));
+
+        dispatch(setPriceRange([0, max]));
 
     };
 };
@@ -57,6 +63,7 @@ export const setSort: ComplexAction = (key: string) => {
         const isDesc = sort.startsWith('-');
         const sortKey = sort.replace('-', '');
 
+        // TODO: We should improve this part of logic
         dispatch({
             type: SET_SORT,
             payload: sortKey !== key
@@ -68,4 +75,18 @@ export const setSort: ComplexAction = (key: string) => {
 
     };
 
+};
+
+export const setPriceRange: SimpleAction = (values: [number, number]) => {
+    return {
+        type: SET_PRICE_RANGE,
+        payload: values
+    };
+};
+
+export const setMaxPriceRange: SimpleAction = (max: number) => {
+    return {
+        type: SET_MAX_PRICE_RANGE,
+        payload: max
+    };
 };
