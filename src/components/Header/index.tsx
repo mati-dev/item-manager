@@ -17,7 +17,7 @@ export function Header(props: HeaderProps): ReactElement {
 
     return (
         <div className={styles.wrapper}>
-            <Text tag={'h1'} className={styles.title}>Item Manager</Text>
+            <Text tag={'h1'}>Item Manager</Text>
             <div className={styles.favWrapper} onClick={props.onFavClick}>
                 <Favorite/>
                 <Text className={styles.favText}>Favourites</Text>
