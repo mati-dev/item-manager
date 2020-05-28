@@ -1,16 +1,19 @@
 
 import React from 'react';
+import {Provider} from 'react-redux';
 
 import {FavItemCard} from './index';
 
 import {appItem} from '../../../test/src/resources';
 import {withViewport, ComponentWrapper} from '../../../test/src/components';
+import {createStoryStore} from '../../../test/src/stories';
 
 
 export default {
     title: 'FavItemCard',
     decorators: [
-        story => <ComponentWrapper>{story()}</ComponentWrapper>
+        story => <ComponentWrapper>{story()}</ComponentWrapper>,
+        story => <Provider store={createStoryStore()}>{story()}</Provider>
     ]
 };
 

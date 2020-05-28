@@ -1,12 +1,15 @@
 
 import React, {Component, ReactElement} from 'react';
 import bind from 'bind-decorator';
+import {connect} from 'react-redux';
 
+import {getSort} from '../../store/selectors';
+import {AppDispatch, setSort} from '../../store/actions';
 
 import {SortItem} from '../SortItem';
+import {Text} from '../Text';
 
 import styles from './styles.scss';
-import {Text} from '../Text';
 
 
 interface Option {
@@ -18,24 +21,21 @@ interface SortProps {
     options: Option[];
 }
 
-interface SortState {
-    sortKey?: string;
-    asc?: boolean;
+interface InjectedProps {
+    sort: string;
+    setSort(key: string): void;
 }
 
-export class Sort extends Component<SortProps, SortState> {
+class SortImpl extends Component<SortProps> {
 
-    public constructor(props: SortProps) {
-        super(props);
-
-        this.state = {};
-
+    private get injected(): InjectedProps {
+        return this.props as unknown as InjectedProps;
     }
 
     public render(): ReactElement {
 
         const {options} = this.props;
-        const {sortKey, asc} = this.state;
+        const {sort} = this.injected;
 
         return (
             <div className={styles.wrapper}>
@@ -43,8 +43,7 @@ export class Sort extends Component<SortProps, SortState> {
                 {options.map(option => (
                     <SortItem key={option.key}
                               sortKey={option.key}
-                              asc={asc}
-                              sort={option.key === sortKey}
+                              sort={sort}
                               onClick={() => this.onItemClick(option.key)}>
                         {option.title}
                     </SortItem>
@@ -56,18 +55,17 @@ export class Sort extends Component<SortProps, SortState> {
 
     @bind
     private onItemClick(key: string): void {
-
-        const {sortKey, asc} = this.state;
-        const isSameKey = sortKey === key;
-
-        // TODO: Refactor this part of the logic, I'm kind of disgusted by it
-        this.setState(sortKey ? {
-            sortKey: (isSameKey && asc) ? undefined : key,
-            asc: isSameKey && !asc
-        } : {
-            sortKey: key
-        });
-
+        this.injected.setSort(key);
     }
 
 }
+
+// tslint:disable-next-line:variable-name
+export const Sort = connect(
+    state => ({
+        sort: getSort(state)
+    }),
+    (dispatch: AppDispatch) => ({
+        setSort: sort => dispatch(setSort(sort))
+    })
+)(SortImpl);

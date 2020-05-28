@@ -1,14 +1,17 @@
 
 import React from 'react';
+import {Provider} from 'react-redux';
 
 import {Sort} from './index';
 import {ComponentWrapper, withViewport} from '../../../test/src/components';
+import {createStoryStore} from '../../../test/src/stories';
 
 
 export default {
     title: 'Sort',
     decorators: [
-        fn => <ComponentWrapper>{fn()}</ComponentWrapper>
+        story => <ComponentWrapper>{story()}</ComponentWrapper>,
+        story => <Provider store={createStoryStore()}>{story()}</Provider>
     ]
 };
 

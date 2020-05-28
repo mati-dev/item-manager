@@ -1,5 +1,5 @@
 
-import {getSearch, getVisibleItems, isAppReady} from './index';
+import {getSearch, getSort, getVisibleItems, isAppReady} from './index';
 import {initialState} from '../initialState';
 import {appItem} from '../../../test/src/resources';
 
@@ -20,6 +20,8 @@ describe('Selectors', () => {
     });
 
     test('getVisibleItems', () => {
+
+        // TODO: Need to implement sort cases
 
         const state = {
             ...initialState,
@@ -43,6 +45,16 @@ describe('Selectors', () => {
 
         expect(emptySearch).toEqual('');
         expect(searchValue).toEqual(appItem.title);
+
+    });
+
+    test('getSort', () => {
+
+        const emptySort = getSort(initialState);
+        const filledSort = getSort({...initialState, sort: 'title'});
+
+        expect(emptySort).toEqual('');
+        expect(filledSort).toEqual('title');
 
     });
 

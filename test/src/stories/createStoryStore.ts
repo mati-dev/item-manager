@@ -8,7 +8,7 @@ import {rootReducer} from '../../../src/store/reducers';
 import {initialState} from '../../../src/store/initialState';
 
 
-export function createStoryStore(changes: Partial<AppState>): Store {
+export function createStoryStore(changes: Partial<AppState> = {}): Store {
 
     return createStore(
         rootReducer,

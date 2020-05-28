@@ -6,8 +6,9 @@ import createMockStore from 'redux-mock-store';
 import Mocked = jest.Mocked;
 
 import {appItem, item} from '../../../test/src/resources';
-import {retrieveItems, setSearchValue, toggleFaved} from './index';
-import {GET_ITEMS, SET_SEARCH, TOGGLE_FAVED} from '../reducers';
+import {retrieveItems, setSearchValue, setSort, toggleFaved} from './index';
+import {GET_ITEMS, SET_SEARCH, SET_SORT, TOGGLE_FAVED} from '../reducers';
+import {initialState} from '../initialState';
 
 
 jest.mock('axios');
@@ -60,6 +61,66 @@ describe('Actions', () => {
             type: TOGGLE_FAVED,
             payload: 1
         }]);
+
+    });
+
+    describe('setSort', () => {
+
+        test('Empty sort', () => {
+
+            const store = mockStore(initialState);
+
+            store.dispatch(setSort('title') as unknown as Action);
+
+            const actions = store.getActions();
+            expect(actions).toEqual([{
+                type: SET_SORT,
+                payload: 'title'
+            }]);
+
+        });
+
+        test('Same sort asc', () => {
+
+            const store = mockStore({...initialState, sort: 'title'});
+
+            store.dispatch(setSort('title') as unknown as Action);
+
+            const actions = store.getActions();
+            expect(actions).toEqual([{
+                type: SET_SORT,
+                payload: '-title'
+            }]);
+
+        });
+
+        test('Same sort desc', () => {
+
+            const store = mockStore({...initialState, sort: '-title'});
+
+            store.dispatch(setSort('title') as unknown as Action);
+
+            const actions = store.getActions();
+            expect(actions).toEqual([{
+                type: SET_SORT,
+                payload: ''
+            }]);
+
+        });
+
+        test('Other sort', () => {
+
+            const store = mockStore({...initialState, sort: 'title'});
+
+            store.dispatch(setSort('description') as unknown as Action);
+
+            const actions = store.getActions();
+            expect(actions).toEqual([{
+                type: SET_SORT,
+                payload: 'description'
+            }]);
+
+        });
 
     });
 

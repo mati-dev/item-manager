@@ -13,4 +13,5 @@ declare module 'react-redux' {
 export interface AppState {
     items: AppItem[];
     search: string;
+    sort: string;
 }

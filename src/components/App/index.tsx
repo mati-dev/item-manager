@@ -12,7 +12,7 @@ import {Text} from '../Text';
 
 import styles from './styles.scss';
 import {isAppReady} from '../../store/selectors';
-import {AsyncDispatch, retrieveItems} from '../../store/actions';
+import {AppDispatch, retrieveItems} from '../../store/actions';
 import {Content} from '../Content';
 
 
@@ -65,7 +65,7 @@ export const App = connect(
     state => ({
         ready: isAppReady(state)
     }),
-    (dispatch: AsyncDispatch) => ({
+    (dispatch: AppDispatch) => ({
         retrieveItems: () => dispatch(retrieveItems())
     })
 )(AppImpl);

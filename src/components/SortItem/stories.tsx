@@ -13,9 +13,9 @@ export default {
     ]
 };
 
-const basic = <SortItem sortKey={'basic'} onClick={action('click')}>Basic</SortItem>;
-const desc = <SortItem sortKey={'desc'} sort asc={false} onClick={action('click')}>Desc</SortItem>;
-const asc = <SortItem sortKey={'asc'} sort asc onClick={action('click')}>Asc</SortItem>;
+const basic = <SortItem sortKey={'basic'} sort={'other'} onClick={action('click')}>Basic</SortItem>;
+const desc = <SortItem sortKey={'desc'} sort={'-desc'} onClick={action('click')}>Desc</SortItem>;
+const asc = <SortItem sortKey={'asc'} sort={'asc'} onClick={action('click')}>Asc</SortItem>;
 
 export const basicMobile = withViewport()(basic);
 export const descMobile = withViewport()(desc);

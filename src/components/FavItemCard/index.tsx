@@ -6,7 +6,7 @@ import {Favorite, FavoriteBorder} from '@material-ui/icons';
 
 
 import {AppItem, Styled} from '../../model';
-import {AsyncDispatch, toggleFaved} from '../../store/actions';
+import {AppDispatch, toggleFaved} from '../../store/actions';
 
 import {Card} from '../Card';
 import {Text} from '../Text';
@@ -75,7 +75,7 @@ class FavItemCardImpl extends Component<FavItemCardProps> {
 // tslint:disable-next-line:variable-name
 export const FavItemCard = connect(
     undefined,
-    (dispatch: AsyncDispatch) => ({
+    (dispatch: AppDispatch) => ({
         toggleFaved: id => dispatch(toggleFaved(id))
     })
 )(FavItemCardImpl);

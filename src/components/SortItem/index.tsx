@@ -8,8 +8,7 @@ import styles from './styles.scss';
 
 interface SortItemProps {
     sortKey: string;
-    sort?: boolean;
-    asc?: boolean;
+    sort: string;
     children?: string;
     onClick(): void;
 }
@@ -18,11 +17,14 @@ interface SortItemProps {
 //       Need to think of a good way to handle with one prop
 export function SortItem(props: SortItemProps): ReactElement {
 
-    const {children, sort, asc, onClick} = props;
+    const {children, sort, sortKey, onClick} = props;
+    const processedSort = sort.replace('-', '');
+    const isSorted = processedSort === sortKey;
+    const asc = !sort.startsWith('-');
 
     return (
         <div className={styles.wrapper} onClick={onClick}>
-            <Text>{children}{sort && (asc ? ' ↑' : ' ↓')}</Text>
+            <Text>{children}{isSorted && (asc ? ' ↑' : ' ↓')}</Text>
         </div>
     );
 

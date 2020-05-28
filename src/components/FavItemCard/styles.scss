@@ -51,6 +51,10 @@ $abs-margin: 10px;
   position: relative;
   padding: 8px 15px;
 
+  @include media() {
+    width: 100%;
+  }
+
   .cardInfo {
     display: flex;
     justify-content: space-between;

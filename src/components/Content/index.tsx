@@ -7,7 +7,7 @@ import {Sort} from '../Sort';
 
 import styles from './styles.scss';
 import {AppItem} from '../../model';
-import {AsyncDispatch, setSearchValue} from '../../store/actions';
+import {AppDispatch, setSearchValue} from '../../store/actions';
 import {getSearch, getVisibleItems} from '../../store/selectors';
 import {FavItemCard} from '../FavItemCard';
 import bind from 'bind-decorator';
@@ -78,7 +78,7 @@ export const Content = connect(
         items: getVisibleItems(state),
         search: getSearch(state)
     }),
-    (dispatch: AsyncDispatch) => ({
+    (dispatch: AppDispatch) => ({
         setSearch: (value: string) => dispatch(setSearchValue(value))
     })
 )(ContentImpl);
