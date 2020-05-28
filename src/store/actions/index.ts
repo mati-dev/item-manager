@@ -3,9 +3,17 @@ import {Action, ActionCreator} from 'redux';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 import {ItemConsumer} from '../../util/ItemConsumer';
-import {RETRIEVE_ITEMS, SET_MAX_PRICE_RANGE, SET_PRICE_RANGE, SET_SEARCH, SET_SORT, TOGGLE_FAVED} from '../reducers';
+import {
+    RETRIEVE_ITEMS,
+    SET_MAX_LOADED_DATA,
+    SET_MAX_PRICE_RANGE,
+    SET_PRICE_RANGE,
+    SET_SEARCH,
+    SET_SORT,
+    TOGGLE_FAVED
+} from '../reducers';
 import {AppState} from '../../model';
-import {getSort} from '../selectors';
+import {getMaxLoadedData, getSort} from '../selectors';
 
 
 // TODO: All this typings should be in an independent file
@@ -89,4 +97,28 @@ export const setMaxPriceRange: SimpleAction = (max: number) => {
         type: SET_MAX_PRICE_RANGE,
         payload: max
     };
+};
+
+export const incrementMaxLoadedData: ComplexAction = () => {
+
+    return async (dispatch, getState) => {
+
+        const state = getState();
+        const maxLoadedData = getMaxLoadedData(state);
+
+        await new Promise(resolve => {
+            setTimeout(() => {
+
+                dispatch({
+                    type: SET_MAX_LOADED_DATA,
+                    payload: maxLoadedData + 5
+                });
+
+                resolve();
+
+            }, 1000);
+        });
+
+    };
+
 };

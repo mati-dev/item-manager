@@ -1,5 +1,15 @@
 
-import {getMaxPriceRange, getPriceRange, getSearch, getSort, getVisibleItems, isAppReady} from './index';
+import {
+    getItemCount,
+    getMaxLoadedData,
+    getMaxPriceRange,
+    getPriceRange,
+    getSearch,
+    getSort,
+    getVisibleFavItems,
+    getVisibleItems,
+    isAppReady
+} from './index';
 import {initialState} from '../initialState';
 import {appItem} from '../../../test/src/resources';
 
@@ -21,7 +31,7 @@ describe('Selectors', () => {
 
     test('getVisibleItems', () => {
 
-        // TODO: Need to implement sort cases
+        // TODO: Need to implement sort and filter tests
 
         const state = {
             ...initialState,
@@ -72,6 +82,29 @@ describe('Selectors', () => {
 
         expect(range).toEqual(100);
 
+    });
+
+    test('getVisibleFavItems', () => {
+
+        // TODO: Need to implement filter tests
+        const items = getVisibleFavItems({...initialState, items: [appItem]});
+
+        expect(items).toEqual([]);
+
+    });
+
+    test('getMaxLoadedData', () => {
+
+        const maxLoadedData = getMaxLoadedData(initialState);
+
+        expect(maxLoadedData).toEqual(5);
+
+    });
+
+    test('getItemCount', () => {
+        const itemCount = getItemCount({...initialState, items: [appItem]});
+
+        expect(itemCount).toEqual(1);
     });
 
 });

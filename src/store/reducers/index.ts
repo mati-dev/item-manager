@@ -10,6 +10,7 @@ export const TOGGLE_FAVED = 'app:toggle-faved';
 export const SET_SORT = 'app:set-sort';
 export const SET_PRICE_RANGE = 'app:set-price-range';
 export const SET_MAX_PRICE_RANGE = 'app:set-max-range';
+export const SET_MAX_LOADED_DATA = 'app:set-max-loaded-data';
 
 
 export const rootReducer: Reducer<AppState> = (state = initialState, {type, payload}) => {
@@ -50,6 +51,12 @@ export const rootReducer: Reducer<AppState> = (state = initialState, {type, payl
             return {
                 ...state,
                 maxPriceRange: payload
+            };
+
+        case SET_MAX_LOADED_DATA:
+            return {
+                ...state,
+                maxLoadedData: payload
             };
 
         default:

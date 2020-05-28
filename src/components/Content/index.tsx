@@ -1,29 +1,48 @@
 
 import React, {ChangeEvent, Component, ReactElement} from 'react';
 import {connect} from 'react-redux';
-import {TextField, Input, InputAdornment} from '@material-ui/core';
+import {TextField, Input, InputAdornment, CircularProgress} from '@material-ui/core';
+import bind from 'bind-decorator';
+import classNames from 'classnames';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import {Sort} from '../Sort';
 import {Text} from '../Text';
 
-import styles from './styles.scss';
-import {AppItem} from '../../model';
-import {AppDispatch, setSearchValue, setPriceRange} from '../../store/actions';
-import {getMaxPriceRange, getPriceRange, getSearch, getVisibleItems} from '../../store/selectors';
+import {AppItem, Styled} from '../../model';
+import {AppDispatch, setSearchValue, setPriceRange, incrementMaxLoadedData} from '../../store/actions';
+import {
+    getMaxLoadedData,
+    getMaxPriceRange,
+    getPriceRange,
+    getSearch,
+    getVisibleFavItems,
+    getVisibleItems,
+    getItemCount
+} from '../../store/selectors';
 import {FavItemCard} from '../FavItemCard';
-import bind from 'bind-decorator';
+
+import styles from './styles.scss';
 
 
-interface InjectedProps {
-    items: AppItem[];
-    search: string;
-    priceRange: [number, number];
-    maxRange: number;
-    setSearch(value: string): void;
-    setPriceRange(values: [number, number]): void;
+interface AppContentProps extends Styled {
+    favs?: boolean;
 }
 
-class ContentImpl extends Component {
+interface InjectedProps {
+    visibleItems: AppItem[];
+    favItems: AppItem[];
+    search: string;
+    priceRange: [number, number];
+    maxPriceRange: number;
+    maxLoadedData: number;
+    itemCount: number;
+    setSearch(value: string): void;
+    setPriceRange(values: [number, number]): void;
+    loadMore(): void;
+}
+
+class AppContentImpl extends Component<AppContentProps> {
 
     private get injected(): InjectedProps {
         return this.props as unknown as InjectedProps;
@@ -31,10 +50,18 @@ class ContentImpl extends Component {
 
     public render(): ReactElement {
 
-        const {items, search, priceRange, maxRange} = this.injected;
+        const {favs, className, style} = this.props;
+        const {
+            visibleItems, favItems, search, priceRange,
+            maxPriceRange, loadMore, maxLoadedData, itemCount
+        } = this.injected;
+
+        const cards = (favs ? favItems : visibleItems).map(item => (
+            <FavItemCard key={`fav_item_${item.id}`} item={item} className={styles.card} favs={favs}/>
+        ));
 
         return (
-            <div className={styles.wrapper}>
+            <div className={classNames(styles.wrapper, favs && styles.favs, className)} style={style}>
 
                 <TextField className={styles.searchInput}
                            variant="outlined"
@@ -43,7 +70,7 @@ class ContentImpl extends Component {
                            value={search}
                            onChange={this.handleOnSearchChange}/>
 
-                {priceRange && maxRange && (
+                {!favs && priceRange && maxPriceRange && (
                     <div className={styles.priceWrapper}>
                         <Text className={styles.priceText}>Price range:</Text>
 
@@ -61,26 +88,35 @@ class ContentImpl extends Component {
                     </div>
                 )}
 
-                <Sort className={styles.sort} options={[
-                    {
-                        title: 'Title',
-                        key: 'title'
-                    }, {
-                        title: 'Description',
-                        key: 'description'
-                    }, {
-                        title: 'Price',
-                        key: 'price'
-                    }, {
-                        title: 'Email',
-                        key: 'email'
-                    }
-                ]} />
+                {!favs && (
+                    <Sort className={styles.sort} options={[
+                        {
+                            title: 'Title',
+                            key: 'title'
+                        }, {
+                            title: 'Description',
+                            key: 'description'
+                        }, {
+                            title: 'Price',
+                            key: 'price'
+                        }, {
+                            title: 'Email',
+                            key: 'email'
+                        }
+                    ]} />
+                )}
 
-                <div>
-                    {items.map(item => (
-                        <FavItemCard key={`fav_item+${item.id}`} item={item} className={styles.card}/>
-                    ))}
+
+                <div className={classNames(styles.cardWrapper, favs && styles.favs)}>
+                    {!favs ? (
+                        <InfiniteScroll hasMore={maxLoadedData < itemCount}
+                                        loader={<div className={styles.progress}><CircularProgress /></div>}
+                                        loadMore={loadMore}>
+                            {cards}
+                        </InfiniteScroll>
+
+                    ) : cards}
+
                 </div>
 
             </div>
@@ -105,15 +141,19 @@ class ContentImpl extends Component {
 }
 
 // tslint:disable-next-line:variable-name
-export const Content = connect(
+export const AppContent = connect(
     state => ({
-        items: getVisibleItems(state),
+        visibleItems: getVisibleItems(state),
+        favItems: getVisibleFavItems(state),
         search: getSearch(state),
         priceRange: getPriceRange(state),
-        maxPriceRange: getMaxPriceRange(state)
+        maxPriceRange: getMaxPriceRange(state),
+        maxLoadedData: getMaxLoadedData(state),
+        itemCount: getItemCount(state)
     }),
     (dispatch: AppDispatch) => ({
         setSearch: (value: string) => dispatch(setSearchValue(value)),
-        setPriceRange: (values: [number, number]) => dispatch(setPriceRange(values))
+        setPriceRange: (values: [number, number]) => dispatch(setPriceRange(values)),
+        loadMore: () => dispatch(incrementMaxLoadedData())
     })
-)(ContentImpl);
+)(AppContentImpl);

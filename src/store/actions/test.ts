@@ -6,8 +6,24 @@ import createMockStore from 'redux-mock-store';
 import Mocked = jest.Mocked;
 
 import {appItem, item} from '../../../test/src/resources';
-import {retrieveItems, setMaxPriceRange, setPriceRange, setSearchValue, setSort, toggleFaved} from './index';
-import {RETRIEVE_ITEMS, SET_MAX_PRICE_RANGE, SET_PRICE_RANGE, SET_SEARCH, SET_SORT, TOGGLE_FAVED} from '../reducers';
+import {
+    retrieveItems,
+    incrementMaxLoadedData,
+    setMaxPriceRange,
+    setPriceRange,
+    setSearchValue,
+    setSort,
+    toggleFaved
+} from './index';
+import {
+    RETRIEVE_ITEMS,
+    SET_MAX_LOADED_DATA,
+    SET_MAX_PRICE_RANGE,
+    SET_PRICE_RANGE,
+    SET_SEARCH,
+    SET_SORT,
+    TOGGLE_FAVED
+} from '../reducers';
 import {initialState} from '../initialState';
 
 
@@ -152,6 +168,19 @@ describe('Actions', () => {
         expect(actions).toEqual([{
             type: SET_MAX_PRICE_RANGE,
             payload: 100
+        }]);
+
+    });
+
+    test('incrementMaxLoadedData', async () => {
+
+        const store = mockStore(initialState);
+        await store.dispatch(incrementMaxLoadedData() as unknown as Action);
+
+        const actions = store.getActions();
+        expect(actions).toEqual([{
+            type: SET_MAX_LOADED_DATA,
+            payload: 10
         }]);
 
     });

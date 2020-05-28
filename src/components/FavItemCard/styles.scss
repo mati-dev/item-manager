@@ -26,6 +26,17 @@ $abs-margin: 10px;
     width: 200px;
   }
 
+  &.imgFavs {
+    height: 150px;
+    width: 150px;
+
+    @include media() {
+      height: 200px;
+      width: 200px;
+    }
+
+  }
+
 }
 
 .fav {
@@ -45,6 +56,11 @@ $abs-margin: 10px;
   @include media() {
     color: $text;
   }
+
+  &.favs {
+    color: $white;
+  }
+
 }
 
 .content {
@@ -90,6 +106,30 @@ $abs-margin: 10px;
 
 .email {
   color: $text-light;
+}
+
+.text-favs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: $white;
+  background-color: transparentize($black, .3);
+  margin: 0 !important;
+  padding: 5px 10px;
+}
+
+.card-favs {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  margin: 0 5px;
+
+  @include media() {
+    height: 200px;
+    width: 200px;
+  }
+
 }
 
 

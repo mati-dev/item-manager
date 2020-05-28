@@ -19,9 +19,12 @@ export default {
 
 const basic = <FavItemCard item={appItem}/>;
 const faved = <FavItemCard item={{...appItem, favourite: true}}/>;
+const modal = <div style={{height: 200, width: 200}}><FavItemCard item={{...appItem, favourite: true}} favs /></div>;
 
 export const basicMobile = withViewport()(basic);
 export const favedMobile = withViewport()(faved);
+export const modalMobile = withViewport()(modal);
 
 export const basicDesktop = () => (basic);
 export const favedDesktop = () => (faved);
+export const modalDesktop = () => (modal);

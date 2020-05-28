@@ -16,4 +16,5 @@ export interface AppState {
     sort: string;
     priceRange?: [number, number];
     maxPriceRange?: number;
+    maxLoadedData: number;
 }

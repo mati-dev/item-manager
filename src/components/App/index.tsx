@@ -3,9 +3,11 @@ import 'normalize.css';
 import 'typeface-roboto';
 import '../../styles/_scaffolding.scss';
 
-import React, {ReactElement} from 'react';
+import React, {Component, ReactElement} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
+import bind from 'bind-decorator';
+import {Dialog, DialogTitle} from '@material-ui/core';
 
 import {Header} from '../Header';
 import {Text} from '../Text';
@@ -13,7 +15,7 @@ import {Text} from '../Text';
 import styles from './styles.scss';
 import {isAppReady} from '../../store/selectors';
 import {AppDispatch, retrieveItems} from '../../store/actions';
-import {Content} from '../Content';
+import {AppContent} from '../Content';
 
 
 interface InjectedProps {
@@ -21,7 +23,18 @@ interface InjectedProps {
     retrieveItems(): void;
 }
 
-class AppImpl extends React.Component {
+interface AppState {
+    showFavs: boolean;
+}
+
+class AppImpl extends Component<{}, AppState> {
+
+    public constructor(props: {}) {
+        super(props);
+
+        this.state = {showFavs: false};
+
+    }
 
     private get injected(): InjectedProps {
         return this.props as unknown as InjectedProps;
@@ -37,20 +50,33 @@ class AppImpl extends React.Component {
 
         return (
             <>
-                <Header/>
+                <Header onFavClick={() => this.setShowFavs(true)} />
                 <div className={classNames(styles.content, !ready && styles.loading)}>
 
                     {!ready ? (
                         <Text tag={'p'} className={styles.loading}>Loading Items...</Text>
                     ) : (
-                        <Content />
+                        <AppContent />
                     )}
 
                 </div>
+
+                <Dialog open={this.state.showFavs}
+                        classes={{paper: styles.dialog}}
+                        onBackdropClick={() => this.setShowFavs(false)} >
+                    <DialogTitle>Favourite List ♥</DialogTitle>
+                    <AppContent className={styles.dialogContent} favs />
+                </Dialog>
+
             </>
 
         );
 
+    }
+
+    @bind
+    private setShowFavs(value: boolean): void {
+        this.setState({showFavs: value});
     }
 }
 

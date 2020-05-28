@@ -2,7 +2,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 
-import {Content} from './index';
+import {AppContent} from './index';
 import {withViewport, ComponentWrapper} from '../../../test/src/components';
 import {appItem} from '../../../test/src/resources';
 import {createStoryStore} from '../../../test/src/stories';
@@ -26,13 +26,13 @@ export default {
 
 const basic = (
     <Provider store={basicStore}>
-        <Content />
+        <AppContent />
     </Provider>
 );
 
 const search = (
     <Provider store={searchStore}>
-        <Content />
+        <AppContent />
     </Provider>
 );
 

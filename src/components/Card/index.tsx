@@ -1,5 +1,5 @@
 
-import React, {PropsWithChildren, ReactElement} from 'react';
+import React, {Component, PropsWithChildren, ReactElement} from 'react';
 import classNames from 'classnames';
 
 import {Styled} from '../../model';
@@ -11,14 +11,19 @@ interface CardProps extends Styled {
     slim?: boolean;
 }
 
-export function Card(props: PropsWithChildren<CardProps>): ReactElement {
+// Needs to be a component to be able to use refs in the Modal
+export class Card extends Component<PropsWithChildren<CardProps>> {
 
-    const {slim, style, className} = props;
+    public render(): ReactElement {
 
-    return (
-        <div className={classNames(styles.wrapper, slim && styles.slim, className)} style={style}>
-            {props.children}
-        </div>
-    );
+        const {slim, style, className} = this.props;
+
+        return (
+            <div className={classNames(styles.wrapper, slim && styles.slim, className)} style={style}>
+                {this.props.children}
+            </div>
+        );
+
+    }
 
 }
