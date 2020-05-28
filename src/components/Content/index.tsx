@@ -57,7 +57,7 @@ class ContentImpl extends Component {
 
                 <div>
                     {items.map(item => (
-                        <FavItemCard item={item} className={styles.card}/>
+                        <FavItemCard key={`fav_item+${item.id}`} item={item} className={styles.card}/>
                     ))}
                 </div>
 

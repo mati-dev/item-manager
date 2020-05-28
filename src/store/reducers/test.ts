@@ -1,5 +1,5 @@
 
-import {GET_ITEMS, rootReducer, SET_SEARCH} from './index';
+import {GET_ITEMS, rootReducer, SET_SEARCH, TOGGLE_FAVED} from './index';
 import {initialState} from '../initialState';
 
 import {appItem} from '../../../test/src/resources';
@@ -40,6 +40,21 @@ describe('Reducers', () => {
         const newState = rootReducer(initialState, action);
 
         expect(newState).toEqual({...initialState, search: action.payload});
+
+    });
+
+    test(TOGGLE_FAVED, () => {
+
+        const action = {
+            type: TOGGLE_FAVED,
+            payload: 0
+        };
+
+        const state = {...initialState, items: [appItem]};
+
+        const newState = rootReducer(state, action);
+
+        expect(newState).toEqual({...state, items: [{...appItem, favourite: true}]});
 
     });
 

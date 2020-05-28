@@ -6,8 +6,8 @@ import createMockStore from 'redux-mock-store';
 import Mocked = jest.Mocked;
 
 import {appItem, item} from '../../../test/src/resources';
-import {retrieveItems, setSearchValue} from './index';
-import {GET_ITEMS, SET_SEARCH} from '../reducers';
+import {retrieveItems, setSearchValue, toggleFaved} from './index';
+import {GET_ITEMS, SET_SEARCH, TOGGLE_FAVED} from '../reducers';
 
 
 jest.mock('axios');
@@ -46,6 +46,19 @@ describe('Actions', () => {
         expect(actions).toEqual([{
             type: SET_SEARCH,
             payload: 'search'
+        }]);
+
+    });
+
+    test('toggleFaved', async () => {
+
+        const store = mockStore();
+        await store.dispatch(toggleFaved(1));
+
+        const actions = store.getActions();
+        expect(actions).toEqual([{
+            type: TOGGLE_FAVED,
+            payload: 1
         }]);
 
     });

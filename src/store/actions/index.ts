@@ -3,7 +3,7 @@ import {Action, ActionCreator} from 'redux';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 import {ItemConsumer} from '../../util/ItemConsumer';
-import {GET_ITEMS, SET_SEARCH} from '../reducers';
+import {GET_ITEMS, SET_SEARCH, TOGGLE_FAVED} from '../reducers';
 import {AppState} from '../../model';
 
 
@@ -34,6 +34,15 @@ export const setSearchValue: SyncAction = (value: string) => {
     return {
         type: SET_SEARCH,
         payload: value
+    };
+
+};
+
+export const toggleFaved: SyncAction = (id: number) => {
+
+    return {
+        type: TOGGLE_FAVED,
+        payload: id
     };
 
 };

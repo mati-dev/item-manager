@@ -1,9 +1,12 @@
 
 import React, {Component, ReactElement} from 'react';
+import {connect} from 'react-redux';
+import bind from 'bind-decorator';
 import {Favorite, FavoriteBorder} from '@material-ui/icons';
 
 
 import {AppItem, Styled} from '../../model';
+import {AsyncDispatch, toggleFaved} from '../../store/actions';
 
 import {Card} from '../Card';
 import {Text} from '../Text';
@@ -16,7 +19,15 @@ interface FavItemCardProps extends Styled {
     item: AppItem;
 }
 
-export class FavItemCard extends Component<FavItemCardProps> {
+interface InjectedProps {
+    toggleFaved(id: number): void;
+}
+
+class FavItemCardImpl extends Component<FavItemCardProps> {
+
+    private get injected(): InjectedProps {
+        return this.props as unknown as InjectedProps;
+    }
 
     public render(): ReactElement {
 
@@ -42,15 +53,29 @@ export class FavItemCard extends Component<FavItemCardProps> {
                     </div>
 
                     {favourite ? (
-                        <Favorite className={styles.icon}/>
+                        <Favorite className={styles.icon} onClick={this.handleFavClick}/>
                     ) : (
-                        <FavoriteBorder className={styles.icon}/>
+                        <FavoriteBorder className={styles.icon} onClick={this.handleFavClick}/>
                     )}
 
                 </div>
 
             </Card>
         );
+
+    }
+
+    @bind
+    private handleFavClick(): void {
+        this.injected.toggleFaved(this.props.item.id);
     }
 
 }
+
+// tslint:disable-next-line:variable-name
+export const FavItemCard = connect(
+    undefined,
+    (dispatch: AsyncDispatch) => ({
+        toggleFaved: id => dispatch(toggleFaved(id))
+    })
+)(FavItemCardImpl);
