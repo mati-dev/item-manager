@@ -3,7 +3,7 @@ import React, {Component, ReactElement} from 'react';
 import {Favorite, FavoriteBorder} from '@material-ui/icons';
 
 
-import {AppItem} from '../../model';
+import {AppItem, Styled} from '../../model';
 
 import {Card} from '../Card';
 import {Text} from '../Text';
@@ -12,14 +12,18 @@ import {Image} from '../Image';
 import styles from './styles.scss';
 
 
-export class FavItemCard extends Component<{item: AppItem}> {
+interface FavItemCardProps extends Styled {
+    item: AppItem;
+}
+
+export class FavItemCard extends Component<FavItemCardProps> {
 
     public render(): ReactElement {
 
-        const {title, description, email, image, price, favourite} = this.props.item;
+        const {item: {title, description, email, image, price, favourite}, className, style} = this.props;
 
         return (
-            <Card slim>
+            <Card slim style={style} className={className}>
                 <div className={styles.wrapper}>
 
                     <Image className={styles.img} src={image} alt={title}/>

@@ -14,9 +14,9 @@ export class ItemConsumer {
 
     public async getItems(): Promise<AppItem[]> {
 
-        const response = await axios.get<Item[]>(ItemConsumer.ITEMS_URL);
+        const response = await axios.get<{items: Item[]}>(ItemConsumer.ITEMS_URL);
 
-        return response.data.map((item, index) => ({...item, id: index}));
+        return response.data.items.map((item, index) => ({...item, id: index}));
 
     }
 

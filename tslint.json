@@ -107,7 +107,9 @@
         "@storybook/addon-centered/react",
         "@storybook/react",
         "@storybook/addon-actions",
-        "param-case"
+        "param-case",
+        "redux-devtools-extension",
+        "redux-mock-store"
       ]
     ],
     "no-inferred-empty-object-type": false,

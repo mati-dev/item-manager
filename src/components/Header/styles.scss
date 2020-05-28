@@ -1,5 +1,6 @@
 
 @import "../../styles/colors";
+@import "../../styles/common";
 @import "../../styles/mixins";
 
 .wrapper {
@@ -7,8 +8,9 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 5px 20px;
-  background-color: $primary-dark;
+  padding: 0 20px;
+  height: $header-size;
+  background-color: $primary;
 
   color: $white;
 

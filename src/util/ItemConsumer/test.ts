@@ -14,7 +14,7 @@ describe('ItemConsumer', () => {
 
         test('Basic behavior', async () => {
 
-            const data = [{
+            const items = [{
                 title: 'iPhone 6S Oro',
                 description: 'Vendo un iPhone 6 S color Oro nuevo y sin estrenar. Me han dado uno en el trabajo ' +
                     'y no necesito el que me compré. En tienda lo encuentras por 749 euros y yo lo vendo por 740.' +
@@ -32,11 +32,11 @@ describe('ItemConsumer', () => {
                 image: 'https://frontend-tech-test-data.s3-eu-west-1.amazonaws.com/img/camera.png'
             }];
 
-            mockedAxios.get.mockResolvedValue({data});
+            mockedAxios.get.mockResolvedValue({data: {items}});
 
-            const items = await new ItemConsumer().getItems();
+            const receivedItems = await new ItemConsumer().getItems();
 
-            expect(items).toEqual(data.map((item, index) => ({...item, id: index})));
+            expect(receivedItems).toEqual(items.map((item, index) => ({...item, id: index})));
 
         });
 

@@ -6,6 +6,7 @@ import bind from 'bind-decorator';
 import {SortItem} from '../SortItem';
 
 import styles from './styles.scss';
+import {Text} from '../Text';
 
 
 interface Option {
@@ -38,6 +39,7 @@ export class Sort extends Component<SortProps, SortState> {
 
         return (
             <div className={styles.wrapper}>
+                <Text className={styles.title} >Sort by...</Text>
                 {options.map(option => (
                     <SortItem key={option.key}
                               sortKey={option.key}

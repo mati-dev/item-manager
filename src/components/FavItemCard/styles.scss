@@ -38,6 +38,12 @@ $abs-margin: 10px;
   right: $abs-margin;
   height: $icon-size;
   width: $icon-size;
+  color: $white;
+  // TODO: We need a shadow here
+
+  @include media() {
+    color: $text;
+  }
 }
 
 .content {
@@ -78,7 +84,7 @@ $abs-margin: 10px;
 }
 
 .email {
-  color: $grey-light;
+  color: $text-light;
 }
 
 
