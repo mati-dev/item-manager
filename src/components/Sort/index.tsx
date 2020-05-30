@@ -1,17 +1,17 @@
 
-import React, {Component, ReactElement} from 'react';
-import bind from 'bind-decorator';
+import React, {ChangeEvent, Component, ReactElement} from 'react';
 import {connect} from 'react-redux';
+import bind from 'bind-decorator';
+import classNames from 'classnames';
+import {Select, MenuItem, InputLabel, FormControl} from '@material-ui/core';
+import {ArrowUpward, ArrowDownward} from '@material-ui/icons';
 
-import {getSort} from '../../store/selectors';
+
+import {getSortDirection, getSortKey} from '../../store/selectors';
 import {AppDispatch, setSort} from '../../store/actions';
-
-import {SortItem} from '../SortItem';
-import {Text} from '../Text';
+import {Styled} from '../../model';
 
 import styles from './styles.scss';
-import {Styled} from '../../model';
-import classNames from 'classnames';
 
 
 interface Option {
@@ -25,7 +25,8 @@ interface SortProps extends Styled {
 
 interface InjectedProps {
     sort: string;
-    setSort(key: string): void;
+    direction: string;
+    dispatchSetSort(key: string): void;
 }
 
 class SortImpl extends Component<SortProps> {
@@ -37,27 +38,57 @@ class SortImpl extends Component<SortProps> {
     public render(): ReactElement {
 
         const {options, className, style} = this.props;
-        const {sort} = this.injected;
+        const {sort, direction} = this.injected;
 
         return (
             <div className={classNames(styles.wrapper, className)} style={style}>
-                <Text className={styles.title} >Sort by...</Text>
-                {options.map(option => (
-                    <SortItem key={option.key}
-                              sortKey={option.key}
-                              sort={sort}
-                              onClick={() => this.onItemClick(option.key)}>
-                        {option.title}
-                    </SortItem>
-                ))}
+                <FormControl className={styles.formControl} size="small">
+                    <InputLabel className={styles.label} id="sort-label">Sort by...</InputLabel>
+                    <Select value={sort}
+                            variant="outlined"
+                            labelId="sort-label"
+                            label="Sort by..."
+                            onChange={(event: ChangeEvent<HTMLSelectElement>) => this.setSortKey(event.target.value)}>
+                        <MenuItem key="none" value="">
+                            None
+                        </MenuItem>
+                        {options.map(option => (
+                            <MenuItem key={option.key} value={option.key}>
+                                {option.title}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+
+                {sort && (
+                    direction === 'asc' ? (
+                            <ArrowUpward className={styles.arrow} onClick={this.toggleSortDirection} />
+                        )
+                        : (
+                            <ArrowDownward className={styles.arrow} onClick={this.toggleSortDirection}/>
+                        )
+                )}
+
             </div>
         );
 
     }
 
     @bind
-    private onItemClick(key: string): void {
-        this.injected.setSort(key);
+    private setSortKey(value: string): void {
+        this.injected.dispatchSetSort(value);
+    }
+
+    @bind
+    private toggleSortDirection(): void {
+
+        const {sort, direction, dispatchSetSort} = this.injected;
+
+        console.log(direction === 'desc' ? sort : `-${sort}`);
+
+        dispatchSetSort(direction === 'desc' ? sort : `-${sort}`);
+
     }
 
 }
@@ -65,9 +96,10 @@ class SortImpl extends Component<SortProps> {
 // tslint:disable-next-line:variable-name
 export const Sort = connect(
     state => ({
-        sort: getSort(state)
+        sort: getSortKey(state),
+        direction: getSortDirection(state)
     }),
     (dispatch: AppDispatch) => ({
-        setSort: sort => dispatch(setSort(sort))
+        dispatchSetSort: sort => dispatch(setSort(sort))
     })
 )(SortImpl);

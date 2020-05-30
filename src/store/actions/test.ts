@@ -9,16 +9,14 @@ import {appItem, item} from '../../../test/src/resources';
 import {
     retrieveItems,
     incrementMaxLoadedData,
-    setMaxPriceRange,
     setPriceRange,
-    setSearchValue,
+    setSearch,
     setSort,
     toggleFaved
 } from './index';
 import {
     RETRIEVE_ITEMS,
     SET_MAX_LOADED_DATA,
-    SET_MAX_PRICE_RANGE,
     SET_PRICE_RANGE,
     SET_SEARCH,
     SET_SORT,
@@ -51,19 +49,16 @@ describe('Actions', () => {
             type: RETRIEVE_ITEMS,
             payload: [appItem]
         }, {
-            type: SET_MAX_PRICE_RANGE,
-            payload: appItem.price
-        }, {
             type: SET_PRICE_RANGE,
             payload: [0, appItem.price]
         }]);
 
     });
 
-    test('setSearchValue', async () => {
+    test('setSearch', async () => {
 
         const store = mockStore();
-        await store.dispatch(setSearchValue('search'));
+        await store.dispatch(setSearch('search'));
 
         const actions = store.getActions();
         expect(actions).toEqual([{
@@ -86,63 +81,17 @@ describe('Actions', () => {
 
     });
 
-    describe('setSort', () => {
+    test('setSort', () => {
 
-        test('Empty sort', () => {
+        const store = mockStore(initialState);
 
-            const store = mockStore(initialState);
+        store.dispatch(setSort('title') as unknown as Action);
 
-            store.dispatch(setSort('title') as unknown as Action);
-
-            const actions = store.getActions();
-            expect(actions).toEqual([{
-                type: SET_SORT,
-                payload: 'title'
-            }]);
-
-        });
-
-        test('Same sort asc', () => {
-
-            const store = mockStore({...initialState, sort: 'title'});
-
-            store.dispatch(setSort('title') as unknown as Action);
-
-            const actions = store.getActions();
-            expect(actions).toEqual([{
-                type: SET_SORT,
-                payload: '-title'
-            }]);
-
-        });
-
-        test('Same sort desc', () => {
-
-            const store = mockStore({...initialState, sort: '-title'});
-
-            store.dispatch(setSort('title') as unknown as Action);
-
-            const actions = store.getActions();
-            expect(actions).toEqual([{
-                type: SET_SORT,
-                payload: ''
-            }]);
-
-        });
-
-        test('Other sort', () => {
-
-            const store = mockStore({...initialState, sort: 'title'});
-
-            store.dispatch(setSort('description') as unknown as Action);
-
-            const actions = store.getActions();
-            expect(actions).toEqual([{
-                type: SET_SORT,
-                payload: 'description'
-            }]);
-
-        });
+        const actions = store.getActions();
+        expect(actions).toEqual([{
+            type: SET_SORT,
+            payload: 'title'
+        }]);
 
     });
 
@@ -155,19 +104,6 @@ describe('Actions', () => {
         expect(actions).toEqual([{
             type: SET_PRICE_RANGE,
             payload: [0, 100]
-        }]);
-
-    });
-
-    test('setMaxPriceRange', async () => {
-
-        const store = mockStore();
-        await store.dispatch(setMaxPriceRange(100));
-
-        const actions = store.getActions();
-        expect(actions).toEqual([{
-            type: SET_MAX_PRICE_RANGE,
-            payload: 100
         }]);
 
     });

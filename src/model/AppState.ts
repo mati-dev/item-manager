@@ -13,8 +13,8 @@ declare module 'react-redux' {
 export interface AppState {
     items: AppItem[];
     search: string;
+    favSearch: string;
     sort: string;
-    priceRange?: [number, number];
-    maxPriceRange?: number;
+    priceRange: [number, number];
     maxLoadedData: number;
 }

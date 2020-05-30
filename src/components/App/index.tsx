@@ -7,15 +7,16 @@ import React, {Component, ReactElement} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import bind from 'bind-decorator';
-import {Dialog, DialogTitle} from '@material-ui/core';
+
+import {isAppReady} from '../../store/selectors';
+import {AppDispatch, retrieveItems} from '../../store/actions';
 
 import {Header} from '../Header';
 import {Text} from '../Text';
+import {AppContent} from '../AppContent';
 
 import styles from './styles.scss';
-import {isAppReady} from '../../store/selectors';
-import {AppDispatch, retrieveItems} from '../../store/actions';
-import {AppContent} from '../Content';
+import {FavouriteModal} from '../FavouriteDialog';
 
 
 interface InjectedProps {
@@ -61,12 +62,7 @@ class AppImpl extends Component<{}, AppState> {
 
                 </div>
 
-                <Dialog open={this.state.showFavs}
-                        classes={{paper: styles.dialog}}
-                        onBackdropClick={() => this.setShowFavs(false)} >
-                    <DialogTitle>Favourite List ♥</DialogTitle>
-                    <AppContent className={styles.dialogContent} favs />
-                </Dialog>
+                <FavouriteModal open={this.state.showFavs} onClose={() => this.setShowFavs(false)} />
 
             </>
 

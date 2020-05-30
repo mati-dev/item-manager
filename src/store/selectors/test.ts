@@ -4,14 +4,15 @@ import {
     getMaxLoadedData,
     getMaxPriceRange,
     getPriceRange,
-    getSearch,
-    getSort,
+    getSearch, getSortDirection, getSortKey,
     getVisibleFavItems,
     getVisibleItems,
     isAppReady
 } from './index';
 import {initialState} from '../initialState';
 import {appItem} from '../../../test/src/resources';
+import {appItems} from '../../../test/src/resources/appItems';
+import {appConfig} from '../../../config/appConfig';
 
 
 describe('Selectors', () => {
@@ -58,13 +59,23 @@ describe('Selectors', () => {
 
     });
 
-    test('getSort', () => {
+    test('getSortKey', () => {
 
-        const emptySort = getSort(initialState);
-        const filledSort = getSort({...initialState, sort: 'title'});
+        const emptySort = getSortKey(initialState);
+        const filledSort = getSortKey({...initialState, sort: 'title'});
 
         expect(emptySort).toEqual('');
         expect(filledSort).toEqual('title');
+
+    });
+
+    test('getSortDirection', () => {
+
+        const ascDirection = getSortDirection({...initialState, sort: 'title'});
+        const descDirection = getSortDirection({...initialState, sort: '-title'});
+
+        expect(ascDirection).toEqual('asc');
+        expect(descDirection).toEqual('desc');
 
     });
 
@@ -78,9 +89,9 @@ describe('Selectors', () => {
 
     test('getMaxPriceRange', () => {
 
-        const range = getMaxPriceRange({...initialState, maxPriceRange: 100});
+        const range = getMaxPriceRange({...initialState, items: appItems});
 
-        expect(range).toEqual(100);
+        expect(range).toEqual(Math.min(appConfig.priceInfinity, 288000));
 
     });
 

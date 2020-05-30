@@ -9,5 +9,5 @@ export const item: Item = {
         'encontrar en la web de apple. Esta libre.',
     price: 740,
     email: 'iphonemail@wallapop.com',
-    image: '/iphone.jpg'
+    image: 'https://frontend-tech-test-data.s3-eu-west-1.amazonaws.com/img/iphone.png'
 };

@@ -2,31 +2,54 @@
 @import "../../styles/colors";
 @import "../../styles/common";
 @import "../../styles/mixins";
+@import "../../styles/positioning";
+
+
+$horizontalPadding: 20px;
 
 .wrapper {
+  position: fixed;
+  z-index: $header-index;
+  display: flex;
+  align-items: center;
+
+  height: $header-size;
+  width: calc(100% - #{$horizontalPadding * 2});
+
+  padding: 0 $horizontalPadding;
+
+  color: $white;
+  background-color: $primary;
+  box-shadow: $box-shadow;
+
+}
+
+.headerContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: auto;
 
-  padding: 0 20px;
-  height: $header-size;
-  background-color: $primary;
-
-  color: $white;
+  max-width: 1000px;
+  width: 100%;
 
   > * {
     padding: 5px;
   }
 }
 
-.favWrapper {
-  display: flex;
-  align-items: center;
-  margin-left: 5px;
-  cursor: pointer;
+.title {
+  padding-right: 15px;
 }
 
-.favText {
+.fav-wrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.fav-text {
   display: none;
 
   @include media() {
@@ -35,4 +58,29 @@
     font-weight: bold;
   }
 
+}
+
+.search-input {
+  max-width: 600px;
+  width: 100%;
+  color: $white;
+
+  @include media() {
+    margin-right: auto;
+  }
+
+  // TODO: The api for changing the colors in material-ui seems to be a bit too complex. There should be a way
+  //       to change the fieldset border color
+  :hover fieldset {
+    border-color: $white !important;
+  }
+
+}
+
+.search-outline {
+  border-color: transparentize($white, .4);
+}
+
+.search-adornment {
+  color: $white;
 }

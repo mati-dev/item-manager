@@ -4,16 +4,15 @@ import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 import {ItemConsumer} from '../../util/ItemConsumer';
 import {
-    RETRIEVE_ITEMS,
+    RETRIEVE_ITEMS, SET_FAVOURITE_SEARCH,
     SET_MAX_LOADED_DATA,
-    SET_MAX_PRICE_RANGE,
     SET_PRICE_RANGE,
     SET_SEARCH,
     SET_SORT,
     TOGGLE_FAVED
 } from '../reducers';
 import {AppState} from '../../model';
-import {getMaxLoadedData, getSort} from '../selectors';
+import {getMaxLoadedData} from '../selectors';
 
 
 // TODO: All this typings should be in an independent file
@@ -37,17 +36,24 @@ export const retrieveItems: ComplexAction = () => {
             payload: items
         });
 
-        dispatch(setMaxPriceRange(max));
-
         dispatch(setPriceRange([0, max]));
 
     };
 };
 
-export const setSearchValue: SimpleAction = (value: string) => {
+export const setSearch: SimpleAction = (value: string) => {
 
     return {
         type: SET_SEARCH,
+        payload: value
+    };
+
+};
+
+export const setFavouriteSearch: SimpleAction = (value: string) => {
+
+    return {
+        type: SET_FAVOURITE_SEARCH,
         payload: value
     };
 
@@ -62,40 +68,17 @@ export const toggleFaved: SimpleAction = (id: number) => {
 
 };
 
-export const setSort: ComplexAction = (key: string) => {
-
-    return (dispatch, getState) => {
-
-        const state = getState();
-        const sort = getSort(state);
-        const isDesc = sort.startsWith('-');
-        const sortKey = sort.replace('-', '');
-
-        // TODO: We should improve this part of logic
-        dispatch({
-            type: SET_SORT,
-            payload: sortKey !== key
-                ? key
-                : isDesc
-                    ? ''
-                    : `-${key}`
-        });
-
+export const setSort: SimpleAction = (key: string) => {
+    return {
+        type: SET_SORT,
+        payload: key
     };
-
 };
 
 export const setPriceRange: SimpleAction = (values: [number, number]) => {
     return {
         type: SET_PRICE_RANGE,
         payload: values
-    };
-};
-
-export const setMaxPriceRange: SimpleAction = (max: number) => {
-    return {
-        type: SET_MAX_PRICE_RANGE,
-        payload: max
     };
 };
 

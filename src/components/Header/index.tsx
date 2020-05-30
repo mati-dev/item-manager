@@ -1,8 +1,14 @@
 
-import React, {ReactElement} from 'react';
-import {Favorite} from '@material-ui/icons';
+import React, {ChangeEvent, ReactElement} from 'react';
+import bind from 'bind-decorator';
+import {connect} from 'react-redux';
+import {InputAdornment, TextField} from '@material-ui/core';
+import {Favorite, Search} from '@material-ui/icons';
 
 import {Text} from '../Text';
+
+import {getSearch} from '../../store/selectors';
+import {AppDispatch, setSearch} from '../../store/actions';
 
 import styles from './styles.scss';
 
@@ -11,18 +17,63 @@ interface HeaderProps {
     onFavClick(): void;
 }
 
-export function Header(props: HeaderProps): ReactElement {
+interface InjectedProps {
+    search: string;
+    setSearch(value: string): void;
+}
 
-    // TODO: Could be interesting for the header to be sticky
+class HeaderImpl extends React.Component<HeaderProps> {
 
-    return (
-        <div className={styles.wrapper}>
-            <Text tag={'h1'}>Item Manager</Text>
-            <div className={styles.favWrapper} onClick={props.onFavClick}>
-                <Favorite/>
-                <Text className={styles.favText}>Favourites</Text>
+    private get injected(): InjectedProps {
+        return this.props as unknown as InjectedProps;
+    }
+
+    public render(): ReactElement {
+
+        const {search} = this.injected;
+
+        return (
+            <div className={styles.wrapper}>
+                <div className={styles.headerContent}>
+                    <Text tag={'h1'} className={styles.title}>IM</Text>
+                    <TextField className={styles.searchInput}
+                               variant="outlined"
+                               placeholder="Looking for something?"
+                               size="small"
+                               color="secondary"
+                               value={search}
+                               InputProps={{
+                                   classes: {root: styles.searchInput, notchedOutline: styles.searchOutline},
+                                   startAdornment: (
+                                       <InputAdornment position="start" className={styles.searchAdornment}>
+                                           <Search/>
+                                       </InputAdornment>
+                                   )
+                               }}
+                               onChange={this.handleOnSearchChange}/>
+                    <div className={styles.favWrapper} onClick={this.props.onFavClick}>
+                        <Favorite/>
+                        <Text className={styles.favText}>Favourites</Text>
+                    </div>
+                </div>
             </div>
-        </div>
-    );
+        );
+
+    }
+
+    @bind
+    private handleOnSearchChange(event: ChangeEvent<HTMLInputElement>): void {
+        this.injected.setSearch(event.target.value);
+    }
 
 }
+
+// tslint:disable-next-line:variable-name
+export const Header = connect(
+    state => ({
+        search: getSearch(state)
+    }),
+    (dispatch: AppDispatch) => ({
+        setSearch: (value: string) => dispatch(setSearch(value))
+    })
+)(HeaderImpl);

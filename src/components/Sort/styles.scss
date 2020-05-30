@@ -1,4 +1,6 @@
 
+@import "../../styles/colors";
+
 
 .wrapper {
   display: flex;
@@ -8,4 +10,19 @@
 
 .title {
   font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+}
+
+.label {
+  top: -8px;
+  left: 14px;
+}
+
+.arrow {
+  padding: 4px;
+  cursor: pointer;
+  color: $primary;
 }

@@ -3,7 +3,6 @@ import {
     RETRIEVE_ITEMS,
     rootReducer,
     SET_MAX_LOADED_DATA,
-    SET_MAX_PRICE_RANGE,
     SET_PRICE_RANGE,
     SET_SEARCH,
     TOGGLE_FAVED
@@ -76,19 +75,6 @@ describe('Reducers', () => {
         const newState = rootReducer(initialState, action);
 
         expect(newState).toEqual({...initialState, priceRange: action.payload});
-
-    });
-
-    test(SET_MAX_PRICE_RANGE, () => {
-
-        const action = {
-            type: SET_MAX_PRICE_RANGE,
-            payload: 100
-        };
-
-        const newState = rootReducer(initialState, action);
-
-        expect(newState).toEqual({...initialState, maxPriceRange: action.payload});
 
     });
 

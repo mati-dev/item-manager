@@ -1,9 +1,10 @@
 
 @import "../../styles/colors";
 @import "../../styles/mixins";
+@import "../../styles/common";
 
 
-$icon-size: 40px;
+$icon-size: 35px;
 $abs-margin: 10px;
 
 .wrapper {
@@ -22,8 +23,8 @@ $abs-margin: 10px;
   object-position: center;
 
   @include media() {
-    height: 200px;
-    width: 200px;
+    height: 180px;
+    width: 180px;
   }
 
   &.imgFavs {
@@ -51,14 +52,16 @@ $abs-margin: 10px;
   width: $icon-size;
   cursor: pointer;
   color: $white;
-  // TODO: We need a shadow here
+  filter: $drop-shadow;
 
   @include media() {
     color: $text;
+    filter: none;
   }
 
   &.favs {
     color: $white;
+    filter: $drop-shadow;
   }
 
 }
@@ -91,7 +94,6 @@ $abs-margin: 10px;
       position: absolute;
       bottom: $abs-margin;
       right: $abs-margin;
-      font-size: 30px;
     }
 
   }

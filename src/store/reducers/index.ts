@@ -5,11 +5,11 @@ import {AppState} from '../../model';
 import {initialState} from '../initialState';
 
 export const RETRIEVE_ITEMS = 'app:get-items';
-export const SET_SEARCH = 'app:set-search-value';
+export const SET_SEARCH = 'app:set-search';
+export const SET_FAVOURITE_SEARCH = 'app:set-favourite-search';
 export const TOGGLE_FAVED = 'app:toggle-faved';
 export const SET_SORT = 'app:set-sort';
 export const SET_PRICE_RANGE = 'app:set-price-range';
-export const SET_MAX_PRICE_RANGE = 'app:set-max-range';
 export const SET_MAX_LOADED_DATA = 'app:set-max-loaded-data';
 
 
@@ -29,6 +29,12 @@ export const rootReducer: Reducer<AppState> = (state = initialState, {type, payl
                 search: payload
             };
 
+        case SET_FAVOURITE_SEARCH:
+            return {
+                ...state,
+                favSearch: payload
+            };
+
         case TOGGLE_FAVED:
             return {
                 ...state,
@@ -45,12 +51,6 @@ export const rootReducer: Reducer<AppState> = (state = initialState, {type, payl
             return {
                 ...state,
                 priceRange: payload
-            };
-
-        case SET_MAX_PRICE_RANGE:
-            return {
-                ...state,
-                maxPriceRange: payload
             };
 
         case SET_MAX_LOADED_DATA:

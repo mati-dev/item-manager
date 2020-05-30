@@ -1,0 +1,66 @@
+
+@import "../../styles/mixins";
+@import "../../styles/colors";
+
+.wrapper {
+  padding: 15px;
+
+  @include media() {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+
+  }
+
+  > div {
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+}
+
+.card {
+
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.price-sort-wrapper {
+  display: flex;
+}
+
+.price-slider {
+  width: 100%;
+}
+
+.sort {
+  width: 100%;
+  max-width: 160px;
+  margin-right: 10px;
+  flex-shrink: 0;
+
+  @include media() {
+    max-width: 200px;
+  }
+
+}
+
+.no-items {
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}

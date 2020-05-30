@@ -1,0 +1,29 @@
+
+@import "../../styles/common";
+@import "../../styles/colors";
+@import "../../styles/positioning";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  font-weight: bold;
+}
+
+.slider {
+  margin-left: 20px;
+}
+
+.value-label {
+  z-index: calc(#{$header-index} + 1);
+  filter: $drop-shadow;
+  color: darken($primary, 10);
+
+  [class^="PrivateValueLabel-label"] {
+    color: $white;
+    font-size: 10px;
+  }
+
+}

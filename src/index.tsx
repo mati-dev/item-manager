@@ -8,12 +8,17 @@ import {App} from './components/App';
 import {store} from './store';
 
 
+// TODO: Abstract this wrappers to avoid repeated code with storybook
+
 ReactDOM.render(
     <StylesProvider injectFirst>
         <ThemeProvider theme={createMuiTheme({
             palette: {
                 primary: {
                     main: '#2bbd7e'
+                },
+                secondary: {
+                    main: '#f5f5f6'
                 }
             }
         })}>

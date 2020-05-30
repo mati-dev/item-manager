@@ -18,7 +18,6 @@ import styles from './styles.scss';
 
 interface FavItemCardProps extends Styled {
     item: AppItem;
-    favs?: boolean;
 }
 
 interface InjectedProps {
@@ -33,40 +32,32 @@ class FavItemCardImpl extends Component<FavItemCardProps> {
 
     public render(): ReactElement {
 
-        const {item: {title, description, email, image, price, favourite}, className, style, favs} = this.props;
+        const {item: {title, description, email, image, price, favourite}, className, style} = this.props;
 
         return (
-            <Card slim style={style} className={classNames(className, favs && styles.cardFavs)}>
-                <div className={styles.wrapper}>
-
-                    <Image className={classNames(styles.img, favs && styles.imgFavs)} src={image} alt={title}/>
-                    {favs && <Text tag={'h2'} className={styles.textFavs}>{title}</Text>}
-                    {!favs && (
-                        <div className={styles.content}>
-                            <div className={styles.cardInfo}>
-                                <div>
-                                    <Text tag={'h2'}>{title}</Text>
-                                    <Text tag={'p'} className={styles.email}>{email}</Text>
-                                </div>
-
-                                <Text className={styles.price}>{`${price} €`}</Text>
-                            </div>
-
-                            <Text tag={'p'} className={styles.description}>{description}</Text>
-
+            <Card slim style={style} className={classNames(styles.wrapper, className)}>
+                <Image className={styles.img} src={image} alt={title} onDoubleClick={this.handleFavClick}/>
+                <div className={styles.content}>
+                    <div className={styles.cardInfo}>
+                        <div>
+                            <Text tag={'h2'}>{title}</Text>
+                            <Text tag={'p'} className={styles.email}>{email}</Text>
                         </div>
-                    )}
 
-                    {favourite ? (
-                        <Favorite className={classNames(styles.icon, favs && styles.favs)}
-                                  onClick={this.handleFavClick}/>
-                    ) : (
-                        <FavoriteBorder className={classNames(styles.icon, favs && styles.favs)}
-                                        onClick={this.handleFavClick}/>
-                    )}
+                        <Text className={styles.price}>{`${price} €`}</Text>
+                    </div>
+
+                    <Text tag={'p'} className={styles.description}>{description}</Text>
 
                 </div>
 
+                {favourite ? (
+                    <Favorite className={styles.icon}
+                              onClick={this.handleFavClick}/>
+                ) : (
+                    <FavoriteBorder className={styles.icon}
+                                    onClick={this.handleFavClick}/>
+                )}
             </Card>
         );
 
@@ -74,6 +65,7 @@ class FavItemCardImpl extends Component<FavItemCardProps> {
 
     @bind
     private handleFavClick(): void {
+        console.log('Hey');
         this.injected.toggleFaved(this.props.item.id);
     }
 

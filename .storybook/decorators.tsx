@@ -1,6 +1,19 @@
 
 import React from 'react';
-import {StylesProvider} from '@material-ui/core';
+import {createMuiTheme, StylesProvider, ThemeProvider} from '@material-ui/core';
 
 
-export const stylesProviderDecorator = fn => <StylesProvider injectFirst>{fn()}</StylesProvider>;
+export const stylesProviderDecorator = story => <StylesProvider injectFirst>{story()}</StylesProvider>;
+export const themeProvider = story =>
+    <ThemeProvider theme={createMuiTheme({
+        palette: {
+            primary: {
+                main: '#2bbd7e'
+            },
+            secondary: {
+                main: '#f5f5f6'
+            }
+        }
+    })}>
+        {story()}
+    </ThemeProvider>;

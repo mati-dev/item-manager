@@ -1,0 +1,45 @@
+
+@import "../../styles/colors";
+@import "../../styles/common";
+@import "../../styles/mixins";
+
+$card-size: 160px;
+$icon-size: 30px;
+
+.card {
+  position: relative;
+  width: $card-size;
+  height: $card-size;
+  padding: 0;
+  margin: 5px;
+}
+
+.title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  background: transparentize($black, .7);
+  color: $white;
+}
+
+.image {
+  width: $card-size;
+  height: $card-size;
+  object-position: center;
+  object-fit: cover;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  height: $icon-size;
+  width: $icon-size;
+  cursor: pointer;
+  color: $white;
+  filter: $drop-shadow;
+
+}

@@ -5,6 +5,8 @@
 
 .content {
 
+  padding-top: $header-size;
+
   &.loading {
     display: flex;
     justify-content: center;
@@ -17,22 +19,4 @@
 .loading {
   font-size: 18px;
   font-weight: bold;
-}
-
-.dialog {
-  margin: 75px 10px 0;
-  width: 100%;
-  align-self: flex-start;
-  max-height: calc(100vh - 150px);
-  max-width: 760px;
-
-  @include media() {
-    align-self: inherit;
-    max-height: 60vh;
-  }
-
-}
-
-.dialog-content {
-  padding: 5px;
 }
