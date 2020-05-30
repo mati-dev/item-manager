@@ -66,7 +66,6 @@ class FavItemCardImpl extends Component<FavItemCardProps> {
 
     @bind
     private handleFavClick(): void {
-        console.log('Hey');
         this.injected.toggleFaved(this.props.item.id);
     }
 

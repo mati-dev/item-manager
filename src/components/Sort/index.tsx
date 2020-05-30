@@ -86,8 +86,6 @@ class SortImpl extends Component<SortProps> {
 
         const {sort, direction, dispatchSetSort} = this.injected;
 
-        console.log(direction === 'desc' ? sort : `-${sort}`);
-
         dispatchSetSort(direction === 'desc' ? sort : `-${sort}`);
 
     }

@@ -1,4 +1,6 @@
 
+import regexify from 'escape-string-regexp';
+
 import {AppState} from '../../model';
 import {appConfig} from '../../../config/appConfig';
 
@@ -15,7 +17,7 @@ export const getVisibleItems = (state: AppState) => {
             const {title, description, price, email} = item;
             const range = getPriceRange(state);
 
-            const regex = new RegExp(getSearch(state), 'giu');
+            const regex = new RegExp(regexify(getSearch(state)), 'giu');
 
             return (!range || (range && price >= range[0] && price <= range[1]))
                 && (regex.test(title) || regex.test(description) || regex.test(email));
@@ -47,7 +49,7 @@ export const getVisibleFavItems = (state: AppState) => state.items
 
         const {title} = item;
 
-        return new RegExp(getFavSearch(state), 'giu').test(title) && item.favourite;
+        return new RegExp(regexify(getFavSearch(state)), 'giu').test(title) && item.favourite;
 
     });
 
