@@ -1,8 +1,4 @@
 
-import 'normalize.css';
-import 'typeface-roboto';
-import '../../styles/_scaffolding.scss';
-
 import React, {Component, ReactElement} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
