@@ -27,21 +27,6 @@ $abs-margin: 10px;
     width: 180px;
   }
 
-  &.imgFavs {
-    height: 150px;
-    width: 150px;
-
-    @include media() {
-      height: 200px;
-      width: 200px;
-    }
-
-  }
-
-}
-
-.fav {
-  color: red;
 }
 
 .icon {
@@ -57,11 +42,6 @@ $abs-margin: 10px;
   @include media() {
     color: $text;
     filter: none;
-  }
-
-  &.favs {
-    color: $white;
-    filter: $drop-shadow;
   }
 
 }
@@ -108,30 +88,6 @@ $abs-margin: 10px;
 
 .email {
   color: $text-light;
-}
-
-.text-favs {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  color: $white;
-  background-color: transparentize($black, .3);
-  margin: 0 !important;
-  padding: 5px 10px;
-}
-
-.card-favs {
-  position: relative;
-  height: 150px;
-  width: 150px;
-  margin: 0 5px;
-
-  @include media() {
-    height: 200px;
-    width: 200px;
-  }
-
 }
 
 
