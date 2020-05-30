@@ -12,10 +12,10 @@ import {
     setPriceRange,
     setSearch,
     setSort,
-    toggleFaved
+    toggleFaved, setFavouriteSearch
 } from './index';
 import {
-    RETRIEVE_ITEMS,
+    RETRIEVE_ITEMS, SET_FAVOURITE_SEARCH,
     SET_MAX_LOADED_DATA,
     SET_PRICE_RANGE,
     SET_SEARCH,
@@ -68,10 +68,23 @@ describe('Actions', () => {
 
     });
 
-    test('toggleFaved', async () => {
+    test('setFavouriteSearch', () => {
 
         const store = mockStore();
-        await store.dispatch(toggleFaved(1));
+        store.dispatch(setFavouriteSearch('search'));
+
+        const actions = store.getActions();
+        expect(actions).toEqual([{
+            type: SET_FAVOURITE_SEARCH,
+            payload: 'search'
+        }]);
+
+    });
+
+    test('toggleFaved', () => {
+
+        const store = mockStore();
+        store.dispatch(toggleFaved(1));
 
         const actions = store.getActions();
         expect(actions).toEqual([{

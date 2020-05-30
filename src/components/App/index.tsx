@@ -9,7 +9,8 @@ import classNames from 'classnames';
 import bind from 'bind-decorator';
 
 import {isAppReady} from '../../store/selectors';
-import {AppDispatch, retrieveItems} from '../../store/actions';
+import {retrieveItems} from '../../store/actions';
+import {AppDispatch} from '../../store/typings';
 
 import {Header} from '../Header';
 import {Text} from '../Text';

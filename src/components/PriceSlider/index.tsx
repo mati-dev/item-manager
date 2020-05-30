@@ -5,10 +5,11 @@ import {Slider} from '@material-ui/core';
 import bind from 'bind-decorator';
 import classNames from 'classnames';
 
-import {AppDispatch, setPriceRange} from '../../store/actions';
-import {getMaxPriceRange, getPriceRange} from '../../store/selectors';
-import {Styled} from '../../model';
 import {appConfig} from '../../../config/appConfig';
+import {setPriceRange} from '../../store/actions';
+import {getMaxPriceRange, getPriceRange} from '../../store/selectors';
+import {AppDispatch} from '../../store/typings';
+import {Styled} from '../../model';
 
 import {Text} from '../Text';
 

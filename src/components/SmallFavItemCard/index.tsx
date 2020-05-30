@@ -3,13 +3,15 @@ import React, {Component, ReactElement} from 'react';
 import {connect} from 'react-redux';
 import {Favorite, FavoriteBorder} from '@material-ui/icons';
 
-import {AppItem} from '../../model';
 import {Card} from '../Card';
 import {Text} from '../Text';
 import {Image} from '../Image';
 
+import {AppItem} from '../../model';
+import {toggleFaved} from '../../store/actions';
+import {AppDispatch} from '../../store/typings';
+
 import styles from './styles.scss';
-import {AppDispatch, toggleFaved} from '../../store/actions';
 
 
 interface SmallFavItemCardProps {

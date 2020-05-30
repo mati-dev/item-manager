@@ -8,7 +8,8 @@ import {Favorite, Search} from '@material-ui/icons';
 import {Text} from '../Text';
 
 import {getSearch} from '../../store/selectors';
-import {AppDispatch, setSearch} from '../../store/actions';
+import {setSearch} from '../../store/actions';
+import {AppDispatch} from '../../store/typings';
 
 import styles from './styles.scss';
 

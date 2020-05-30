@@ -1,8 +1,7 @@
 
-import {Action, ActionCreator} from 'redux';
-import {ThunkAction, ThunkDispatch} from 'redux-thunk';
-
 import {ItemConsumer} from '../../util/ItemConsumer';
+import {ComplexAction, SimpleAction} from '../typings';
+
 import {
     RETRIEVE_ITEMS, SET_FAVOURITE_SEARCH,
     SET_MAX_LOADED_DATA,
@@ -11,18 +10,8 @@ import {
     SET_SORT,
     TOGGLE_FAVED
 } from '../reducers';
-import {AppState} from '../../model';
 import {getMaxLoadedData} from '../selectors';
 
-
-// TODO: All this typings should be in an independent file
-interface AppAction extends Action<string> {
-    payload: unknown;
-}
-
-export type SimpleAction = ActionCreator<AppAction>;
-export type ComplexAction = ActionCreator<ThunkAction<void, AppState, void, AppAction>>;
-export type AppDispatch = ThunkDispatch<AppState, void, AppAction>;
 
 export const retrieveItems: ComplexAction = () => {
     return async dispatch => {

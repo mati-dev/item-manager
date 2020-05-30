@@ -1,10 +1,10 @@
 
 import {
     RETRIEVE_ITEMS,
-    rootReducer,
+    rootReducer, SET_FAVOURITE_SEARCH,
     SET_MAX_LOADED_DATA,
     SET_PRICE_RANGE,
-    SET_SEARCH,
+    SET_SEARCH, SET_SORT,
     TOGGLE_FAVED
 } from './index';
 import {initialState} from '../initialState';
@@ -50,6 +50,19 @@ describe('Reducers', () => {
 
     });
 
+    test(SET_FAVOURITE_SEARCH, () => {
+
+        const action = {
+            type: SET_FAVOURITE_SEARCH,
+            payload: 'iPhone'
+        };
+
+        const newState = rootReducer(initialState, action);
+
+        expect(newState).toEqual({...initialState, favSearch: action.payload});
+
+    });
+
     test(TOGGLE_FAVED, () => {
 
         const action = {
@@ -88,6 +101,19 @@ describe('Reducers', () => {
         const newState = rootReducer(initialState, action);
 
         expect(newState).toEqual({...initialState, maxLoadedData: action.payload});
+
+    });
+
+    test(SET_SORT, () => {
+
+        const action = {
+            type: SET_SORT,
+            payload: 'price'
+        };
+
+        const newState = rootReducer(initialState, action);
+
+        expect(newState).toEqual({...initialState, sort: action.payload});
 
     });
 

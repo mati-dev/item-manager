@@ -3,8 +3,9 @@ import React, {ChangeEvent, ReactElement} from 'react';
 import {connect} from 'react-redux';
 import {Dialog, DialogTitle, DialogContent, DialogActions, TextField} from '@material-ui/core';
 
-import {AppDispatch, setFavouriteSearch} from '../../store/actions';
+import {setFavouriteSearch} from '../../store/actions';
 import {getFavSearch, getVisibleFavItems} from '../../store/selectors';
+import {AppDispatch} from '../../store/typings';
 import {AppItem} from '../../model';
 
 import {Text} from '../Text';

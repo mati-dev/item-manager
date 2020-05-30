@@ -32,19 +32,41 @@ describe('Selectors', () => {
 
     test('getVisibleItems', () => {
 
-        // TODO: Need to implement sort and filter tests
-
         const state = {
             ...initialState,
-            items: [appItem]
+            items: appItems
         };
 
         const emptySearch = getVisibleItems(state);
-        const withResults = getVisibleItems({...state, search: appItem.title});
+        const withResults = getVisibleItems({...state, search: appItems[0].email});
         const withoutResults = getVisibleItems({...state, search: 'whatever'});
+        const sortedAsc = getVisibleItems({...state, sort: 'title'});
+        const sortedDesc = getVisibleItems({...state, sort: '-title'});
+        const sortedPriceAsc = getVisibleItems({...state, sort: 'price'});
+        const sortedPriceDesc = getVisibleItems({...state, sort: '-price'});
 
-        expect(emptySearch).toEqual([appItem]);
-        expect(withResults).toEqual([appItem]);
+        expect(emptySearch).toEqual(appItems);
+        expect(withResults).toEqual([appItems[0]]);
+        expect(withoutResults).toEqual([]);
+        expect(sortedPriceAsc).toEqual(appItems.sort((a, b) => a.price - b.price));
+        expect(sortedPriceDesc).toEqual(appItems.sort((a, b) => b.price - a.price));
+        expect(sortedAsc).toEqual(appItems.sort((a, b) => a.title.localeCompare(b.title)));
+        expect(sortedDesc).toEqual(appItems.sort((a, b) => -a.title.localeCompare(b.title)));
+
+    });
+
+    test('getVisibleFavItems', () => {
+
+        const items = appItems.map((item, index) => index % 2 ? {...item, favourite: true} : item);
+        const favItems = items.filter(item => item.favourite);
+        const state = {...initialState, items};
+
+        const emptySearch = getVisibleFavItems(state);
+        const withResults = getVisibleFavItems({...state, favSearch: favItems[0].title});
+        const withoutResults = getVisibleFavItems({...state, favSearch: 'whatever'});
+
+        expect(emptySearch).toEqual(favItems);
+        expect(withResults).toEqual([favItems[0]]);
         expect(withoutResults).toEqual([]);
 
     });
@@ -95,15 +117,6 @@ describe('Selectors', () => {
 
     });
 
-    test('getVisibleFavItems', () => {
-
-        // TODO: Need to implement filter tests
-        const items = getVisibleFavItems({...initialState, items: [appItem]});
-
-        expect(items).toEqual([]);
-
-    });
-
     test('getMaxLoadedData', () => {
 
         const maxLoadedData = getMaxLoadedData(initialState);
@@ -113,9 +126,11 @@ describe('Selectors', () => {
     });
 
     test('getItemCount', () => {
+
         const itemCount = getItemCount({...initialState, items: [appItem]});
 
         expect(itemCount).toEqual(1);
+
     });
 
 });

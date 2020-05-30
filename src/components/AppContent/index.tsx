@@ -11,8 +11,9 @@ import {PriceSlider} from '../PriceSlider';
 import {Text} from '../Text';
 
 import {AppItem, Styled} from '../../model';
-import {AppDispatch, incrementMaxLoadedData} from '../../store/actions';
+import {incrementMaxLoadedData} from '../../store/actions';
 import {getMaxLoadedData, getVisibleItems, getItemCount} from '../../store/selectors';
+import {AppDispatch} from '../../store/typings';
 
 import styles from './styles.scss';
 

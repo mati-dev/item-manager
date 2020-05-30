@@ -8,7 +8,8 @@ import {ArrowUpward, ArrowDownward} from '@material-ui/icons';
 
 
 import {getSortDirection, getSortKey} from '../../store/selectors';
-import {AppDispatch, setSort} from '../../store/actions';
+import {setSort} from '../../store/actions';
+import {AppDispatch} from '../../store/typings';
 import {Styled} from '../../model';
 
 import styles from './styles.scss';

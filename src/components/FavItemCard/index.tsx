@@ -7,7 +7,8 @@ import classNames from 'classnames';
 
 
 import {AppItem, Styled} from '../../model';
-import {AppDispatch, toggleFaved} from '../../store/actions';
+import {toggleFaved} from '../../store/actions';
+import {AppDispatch} from '../../store/typings';
 
 import {Card} from '../Card';
 import {Text} from '../Text';
