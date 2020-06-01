@@ -1,5 +1,5 @@
 {
-  "name": "typescript-react-boilerplate",
+  "name": "item-manager",
   "version": "1.0.4",
   "description": "Simple typescript & React boilerplate",
   "scripts": {
@@ -18,7 +18,7 @@
     "watch:scss:test": "tsm test -w",
     "clear": "clearb"
   },
-  "repository": "https://github.com/mati-dev/typescript-react-boilerplate",
+  "repository": "https://github.com/mati-dev/item-manager",
   "keywords": [
     "typescript",
     "react"
