@@ -52,5 +52,8 @@ npm run build:app
 
 This command will create a folder with static files to be deployed called `dist`.
 
+## Deploy
+
 The repo also includes a small Dockerfile to ease up the deployment of the app. You can find a 
-production version running at `https://wallapop.mati-dev.es`
+production version running at `https://wallapop.mati-dev.es`, and an static storybook at 
+`https://wallapop.mati-dev.es/storybook`
