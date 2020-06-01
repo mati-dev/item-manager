@@ -1,10 +1,11 @@
 
 import {Configuration} from 'webpack';
-
-import mainConfig from './webpack.config';
-import {styleRule} from './rules';
 import TerserJSPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+
+import mainConfig from '../webpack.config';
+import {styleRule} from '../rules';
+import {htmlPlugin} from '../plugins';
 
 
 const config: Configuration = {
@@ -19,6 +20,10 @@ const config: Configuration = {
             styleRule('production')
         ]
     },
+    plugins: [
+        ...mainConfig.plugins,
+        htmlPlugin
+    ],
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
         // TODO: Need to analyze produced chunks after the app is done

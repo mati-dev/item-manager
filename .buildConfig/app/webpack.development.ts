@@ -2,8 +2,9 @@
 import {Configuration, HotModuleReplacementPlugin} from 'webpack';
 import path from 'path';
 
-import mainConfig from './webpack.config';
-import {styleRule} from './rules';
+import mainConfig from '../webpack.config';
+import {styleRule} from '../rules';
+import {htmlPlugin} from '../plugins';
 
 
 const config: Configuration = {
@@ -15,17 +16,13 @@ const config: Configuration = {
         ...mainConfig.module,
         rules: [
             ...mainConfig.module.rules,
-            styleRule('development'),
-            {
-                enforce: 'pre',
-                test: /\.js$/,
-                loader: 'source-map-loader'
-            }
+            styleRule('development')
         ]
     },
     plugins: [
         ...mainConfig.plugins,
-        new HotModuleReplacementPlugin()
+        new HotModuleReplacementPlugin(),
+        htmlPlugin
     ],
 
     devServer: {

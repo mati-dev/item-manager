@@ -29,7 +29,8 @@ export class StoryTestSet {
 
         await page.setViewport(isMobile ? {height: 896, width: 414} : {height: 1112, width: 834});
 
-        await page.goto(`http://localhost:9009/iframe.html?selectedKind=${title}&selectedStory=${paramCase(sample)}`,
+        const url = `http://localhost:9009/iframe?id=${title.toLowerCase()}--${paramCase(sample)}`;
+        await page.goto(url,
             {waitUntil: 'networkidle2'});
 
         const shot = await page.screenshot();

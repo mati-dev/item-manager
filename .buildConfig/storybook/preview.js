@@ -1,12 +1,12 @@
 
 
-import 'normalize.css';
+import 'normalize.css/normalize.css';
 import 'typeface-roboto';
-import '../src/styles/_scaffolding.scss';
+import '../../src/styles/_scaffolding.scss';
 
 import {addDecorator} from '@storybook/react';
 
-import {withStylesProvider, withThemeProvider} from "../src/contextProviders";
+import {withStylesProvider, withThemeProvider} from "../../src/contextProviders";
 
 
 addDecorator(story => withStylesProvider(story()));

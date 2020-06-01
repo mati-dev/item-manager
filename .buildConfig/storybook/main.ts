@@ -1,5 +1,6 @@
 
-import defaultConfig from '../.buildConfig/webpack.development';
+import defaultConfig from '../webpack.config';
+import {styleRule} from '../rules';
 
 
 export default {
@@ -15,12 +16,15 @@ export default {
         '@storybook/addon-actions/register'
     ],
     presets: ['@storybook/preset-typescript', '@storybook/preset-scss'],
-    stories: ['../src/**/?(*.)stories.[jt]s?(x)'],
+    stories: ['../../src/**/?(*.)stories.[jt]s?(x)'],
     webpackFinal: config => {
         return {
             ...config,
-            module: { ...config.module, rules: defaultConfig.module.rules },
-            plugins: [...config.plugins, ...defaultConfig.plugins]
+            module: {...config.module, rules: [...defaultConfig.module.rules, styleRule('storybook')]},
+            plugins: [
+                ...config.plugins,
+                ...defaultConfig.plugins
+            ]
         };
     }
 };

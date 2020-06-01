@@ -1,7 +1,6 @@
 
 import path from 'path';
 import {Configuration, HashedModuleIdsPlugin} from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 
@@ -34,10 +33,6 @@ const config: Configuration = {
         }]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Item Manager',
-            template: 'src/index.ejs'
-        }),
         new HashedModuleIdsPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[hash].css',
