@@ -5,7 +5,7 @@
   "scripts": {
     "test": "start-server-and-test test:storybook http-get://localhost:9009 test:jest",
     "test:jest": "jest",
-    "test:storybook": "npm run build:storybook && serve -l 9009 dist-storybook",
+    "test:storybook": "npm run build:storybook && serve -l 9009 dist/storybook",
     "test:update": "start-server-and-test test:storybook http-get://localhost:9009 test:jest:update",
     "test:jest:update": "jest -u",
     "build": "rm -Rf dist && npm run clear && npm run build:app && npm run build:storybook",
